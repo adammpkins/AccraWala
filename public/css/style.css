@@ -1,0 +1,60 @@
+body{
+    background: linear-gradient(180deg, #CF0921 0 33%, #FCD20F 33% 66%, #006B3D 66% 99%);
+    font-face: "Open Sans", sans-serif;
+}
+
+.content{
+    background-color: #ffff;
+    float:left;
+    width: 80% !important;
+}
+
+.nav-menu{
+    background-color: #000;
+    color:#fff;
+
+}
+
+.nav-menu a{
+    color:#fff;
+}
+
+.top-bar{
+    background-color: #000;
+    color:#fff;
+    height:10%;
+}
+
+.aw-logo{
+    float:left;
+    height:90px !important;
+    width:165.76px !important;
+    margin-top:10px;
+    margin-left:10px;
+}
+
+#map { height: 100%;
+width:100%}
+
+.min-vh-90{
+
+    min-height: 90vh!important;
+
+}
+
+.nav-link.red:hover, .nav-link.red:focus, .nav-link.red:active {
+    color:#CF0921;
+}
+
+.nav-link.yellow:hover, .nav-link.yellow:focus, .nav-link.yellow:active {
+    color:#FCD20F;
+}
+
+.nav-link.green:hover, .nav-link.green:focus, .nav-link.green:active {
+    color:#006B3D;
+}
+
+
+/*Mobile Breakpoints*/
+@media (max-width: 767px) {
+}
