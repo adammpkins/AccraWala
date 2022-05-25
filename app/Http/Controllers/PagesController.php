@@ -8,6 +8,14 @@ use Inertia\Inertia;
 
 class PagesController extends Controller
 {
+    public function index()
+    {
+        $pages = Page::all();
+
+        return Inertia::render('Index', [
+            'pages' => $pages,
+        ]);
+    }
     public function create(): \Inertia\Response
     {
         return Inertia::render('Create');
@@ -20,6 +28,6 @@ class PagesController extends Controller
         $page->slug = $request->slug;
         $page->body = $request->body;
         $page->save();
-        return redirect('/admin/pages/create');
+        return redirect('/admin/pages');
     }
 }
