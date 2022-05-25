@@ -54,7 +54,24 @@ width:100%}
     color:#006B3D;
 }
 
-
-/*Mobile Breakpoints*/
-@media (max-width: 767px) {
+.green{
+    background-color:#006B3D;
+    color:#ffffff;
 }
+
+.green:hover{
+    background-color: #005732;
+    color:#ffffff;
+}
+
+.red{
+    background-color:#CF0921;
+    color:#ffffff;
+
+}
+
+.form-grid-item{
+    width:50%;
+}
+
+

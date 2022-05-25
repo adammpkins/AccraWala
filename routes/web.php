@@ -29,6 +29,10 @@ Route::get('/about', function () {
     return "About";
 });
 
+Route::post('/admin/pages', 'App\Http\Controllers\PagesController@store');
+
+Route::get('/admin/pages/create','App\Http\Controllers\PagesController@create');
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

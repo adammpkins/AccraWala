@@ -2,7 +2,7 @@
 
 
     <div class="row top-bar">
-        <img src="img/aw-logo.jpg" class="aw-logo" alt="" />
+        <img src="/img/aw-logo.jpg" class="aw-logo" alt="" />
     </div>
     <div class="row flex-wrap">
     <Nav />
