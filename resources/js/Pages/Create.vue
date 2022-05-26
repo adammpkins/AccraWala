@@ -14,15 +14,21 @@
                 <input v-model="form.slug" name="slug" type="text" class="form-control">
             </div>
             </div>
+            <div class="row w-75 m-auto">
+                <div class="col-md-12" >
+                    <label for="icon">Icon</label>
+                    <input v-model="form.icon" name="icon" type="text" class="form-control">
+                </div>
+            </div>
             <div class="row w-75 mx-auto my-3 h-50">
                 <div class="col-md-12">
                     <label for="slug">Body</label>
-                    <textarea v-model="form.body" name="body" class="form-control h-100"></textarea>
+                    <textarea v-model="form.body" name="body" class="form-control h-100" id="tinymce"></textarea>
                 </div>
             </div>
         <div class="row w-75 mx-auto justify-content-left">
             <div class="col-auto">
-                <button type="submit" class="btn w-100 green my-3">Submit</button>
+                <button type="submit" class="btn w-100 green-btn my-3">Submit</button>
             </div>
 
         </div>
@@ -33,16 +39,18 @@
 
 
 
-
 </template>
 
 <script setup>
 
 import {useForm} from "@inertiajs/inertia-vue3"
+import Editor from '@tinymce/tinymce-vue'
+
 let form = useForm({
     title: '',
     slug: '',
-    body: ''
+    body: '',
+    icon: ''
 });
 
 let submit = () => {
@@ -52,6 +60,8 @@ let submit = () => {
 }
 
 </script>
+
+
 
 <style scoped>
 

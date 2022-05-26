@@ -1,7 +1,9 @@
 <template>
     <div class="mx-auto py-3 content justify-content-center">
-        <Link href="/admin/pages/create">
-            <a class="btn green float-end">Create a new page</a>
+        <div class="container">
+            <h1 class="float-start">Pages</h1>
+        <Link  class="btn green-btn float-end" href="/admin/pages/create">
+            <span class="bi bi-plus"></span>New page
         </Link>
         <table class="table">
             <thead>
@@ -9,26 +11,37 @@
                 <th scope="col">Id</th>
                 <th scope="col">Title</th>
                 <th scope="col">Slug</th>
+                <th scope="col">Actions</th>
             </tr>
             </thead>
             <tbody>
             <tr v-for="page in pages">
-                <th scope="row">{{page.id}}</th>
-                <td>{{page.title}}</td>
-                <td>{{page.slug}}</td>
+                <th scope="row"><Link :href="'/' + page.slug">
+                    {{page.id}} </Link></th>
+                <td><Link :href="'/' + page.slug">{{page.title}}</Link></td>
+                <td><Link :href="'/' + page.slug">{{page.slug}}</Link></td>
+
+                <td><Link :href="'/admin/pages/' + page.id + '/edit/'" class="btn green-btn mx-2"><span class="bi bi-pencil"></span> Edit</Link><button @click="destroy(page.id)" class="btn red-btn" ><span class="bi bi-trash"></span> Delete</button></td>
             </tr>
 
             </tbody>
         </table>
+        </div>
     </div>
 </template>
 
 <script setup>
 import {Link} from "@inertiajs/inertia-vue3";
-
-const props = defineProps([
+import {useForm} from "@inertiajs/inertia-vue3"
+import {Inertia} from "@inertiajs/inertia";
+let props = defineProps([
     'pages'
 ])
+
+let destroy = (id) => {
+    Inertia.delete('/admin/pages/' +id + '/delete')
+}
+
 </script>
 
 <style scoped>

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('slug', 100)->unique();
+            $table->text('icon');
             $table->longText('body')->nullable();
             $table->softDeletes();
             $table->timestamps();

@@ -24,10 +24,7 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/about', function () {
-    sleep(6);
-    return "About";
-});
+
 
 Route::post('/admin/pages', 'App\Http\Controllers\PagesController@store');
 
@@ -39,4 +36,9 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::delete('/admin/pages/{page}/delete', 'App\Http\Controllers\PagesController@destroy');
+
+Route::get('/{page:slug}', 'App\Http\Controllers\PagesController@show');
+Route::get('/admin/pages/{page}/edit', 'App\Http\Controllers\PagesController@edit');
+Route::put('/admin/pages/{page}', 'App\Http\Controllers\PagesController@update');
 require __DIR__.'/auth.php';

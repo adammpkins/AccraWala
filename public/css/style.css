@@ -54,17 +54,17 @@ width:100%}
     color:#006B3D;
 }
 
-.green{
+.green-btn{
     background-color:#006B3D;
     color:#ffffff;
 }
 
-.green:hover{
+.green-btn:hover{
     background-color: #005732;
     color:#ffffff;
 }
 
-.red{
+.red-btn{
     background-color:#CF0921;
     color:#ffffff;
 
@@ -74,4 +74,13 @@ width:100%}
     width:50%;
 }
 
+table a{
+    color:#000000;
+    text-decoration: none;
+}
+
+table a:hover{
+    color:#006B3D;
+    text-decoration: underline;
+}
 
