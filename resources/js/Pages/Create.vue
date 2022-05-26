@@ -22,8 +22,10 @@
             </div>
             <div class="row w-75 mx-auto my-3 h-50">
                 <div class="col-md-12">
-                    <label for="slug">Body</label>
-                    <textarea v-model="form.body" name="body" class="form-control h-100" id="tinymce"></textarea>
+                    <label for="body">Body</label>
+                    <ckeditor :editor="editor" v-model="form.body" :config="editorConfig"></ckeditor>
+
+
                 </div>
             </div>
         <div class="row w-75 mx-auto justify-content-left">
@@ -41,10 +43,27 @@
 
 </template>
 
+
+<script>
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
+export default {
+    data() {
+        return {
+
+            editor: ClassicEditor,
+            editorData: '<p>Content of the editor.</p>',
+            editorConfig: {
+                // The configuration of the editor.
+            }
+        };
+    }
+}
+</script>
 <script setup>
 
 import {useForm} from "@inertiajs/inertia-vue3"
-import Editor from '@tinymce/tinymce-vue'
+
 
 let form = useForm({
     title: '',
@@ -60,7 +79,6 @@ let submit = () => {
 }
 
 </script>
-
 
 
 <style scoped>
