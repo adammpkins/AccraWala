@@ -1,6 +1,8 @@
+
 <script setup>
 import "leaflet/dist/leaflet.css"
 import { LMap, LTileLayer, LGeoJson } from "@vue-leaflet/vue-leaflet";
+
 
 defineProps({
     canLogin: Boolean,
@@ -8,6 +10,9 @@ defineProps({
     laravelVersion: String,
     phpVersion: String
 });
+
+
+
 </script>
 <script>
 

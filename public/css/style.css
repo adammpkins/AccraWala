@@ -94,3 +94,6 @@ table a:hover{
     cursor: pointer;
 
 }
+
+div.min-h-screen > div.bg-white
+{padding:25px;}
