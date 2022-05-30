@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Page;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tightenco\Ziggy\Ziggy;
@@ -34,6 +35,7 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request)
     {
+        $pages = Page::all();
         return array_merge(parent::share($request), [
             'auth' => [
                 'user' => $request->user(),
@@ -41,6 +43,7 @@ class HandleInertiaRequests extends Middleware
             'ziggy' => function () {
                 return (new Ziggy)->toArray();
             },
+            'pages' => $pages,
         ]);
     }
 }

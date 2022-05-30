@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+require __DIR__.'/auth.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -43,4 +44,3 @@ Route::get('/admin/pages/{page}/edit', 'App\Http\Controllers\PagesController@edi
 Route::put('/admin/pages/{page}', 'App\Http\Controllers\PagesController@update');
 Route::post('/ckeditor/upload', 'App\Http\Controllers\PagesController@@upload')->name('ckeditor.upload');
 
-require __DIR__.'/auth.php';

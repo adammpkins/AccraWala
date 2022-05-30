@@ -84,3 +84,13 @@ table a:hover{
     text-decoration: underline;
 }
 
+.logout{
+
+    background-color: transparent;
+    border: none;
+    color: white;
+    text-align: center;
+    margin: 4px 2px;
+    cursor: pointer;
+
+}

@@ -1,3 +1,8 @@
+<script>
+export default {
+    layout:null,
+};
+</script>
 <script setup>
 import { computed } from 'vue';
 import BreezeButton from '@/Components/Button.vue';
@@ -40,3 +45,7 @@ const verificationLinkSent = computed(() => props.status === 'verification-link-
         </form>
     </BreezeGuestLayout>
 </template>
+
+<style scoped>
+@import '/css/app.css';
+</style>

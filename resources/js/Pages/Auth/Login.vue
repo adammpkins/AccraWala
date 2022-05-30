@@ -1,3 +1,8 @@
+<script>
+export default {
+    layout:null,
+};
+</script>
 <script setup>
 import BreezeButton from '@/Components/Button.vue';
 import BreezeCheckbox from '@/Components/Checkbox.vue';
@@ -65,3 +70,7 @@ const submit = () => {
         </form>
     </BreezeGuestLayout>
 </template>
+
+<style scoped>
+@import '/css/app.css';
+</style>
