@@ -37,8 +37,9 @@ export default {
 <Head>
     <title>Home</title>
 </Head>
-    <div class="mx-auto py-3 content">
-        <l-map ref="map" v-model:zoom="zoom" :center="[5.59, -0.19]">
+
+    <div class="mx-auto content">
+        <l-map ref="map" id="map" v-model:zoom="zoom" :center="[5.59, -0.19]">
             <l-tile-layer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 layer-type="base"

@@ -32,6 +32,8 @@ Route::post('/admin/pages', 'App\Http\Controllers\PagesController@store');
 Route::get('/admin/pages/create','App\Http\Controllers\PagesController@create');
 
 Route::get('/admin/pages/', 'App\Http\Controllers\PagesController@index');
+Route::get('/admin', 'App\Http\Controllers\AdminController@index');
+
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

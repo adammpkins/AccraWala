@@ -6,12 +6,31 @@ body{
 .content{
     background-color: #ffff;
     float:left;
-    width: 80% !important;
+    width:70% ;
 }
+
+@media (min-width: 1200px) {
+    .content{
+        width:80% ;
+    }
+}
+@media (max-width: 626px) {
+    .content{
+        width:60% ;
+    }
+}
+
+@media (max-width: 576px) {
+    .content{
+        width:80% ;
+    }
+}
+
 
 .nav-menu{
     background-color: #000;
     color:#fff;
+    max-width
 
 }
 
@@ -34,7 +53,8 @@ body{
 }
 
 #map { height: 100%;
-width:100%}
+width:100%;
+}
 
 .min-vh-90{
 
@@ -95,5 +115,19 @@ table a:hover{
 
 }
 
+.min-vh-90{
+    height:100%;
+    width:100%;
+}
+#map{
+    height: 100%;
+    width:100%;
+    min-width: 250px;
+}
+
 div.min-h-screen > div.bg-white
 {padding:25px;}
+
+
+.div-wrap{
+}
