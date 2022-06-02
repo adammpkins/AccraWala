@@ -27,22 +27,20 @@ Route::get('/', function () {
 
 
 
-Route::post('/admin/pages', 'App\Http\Controllers\PagesController@store');
+Route::post('/admin/pages', 'App\Http\Controllers\PagesController@store')->middleware(['auth', 'verified']);
 
-Route::get('/admin/pages/create','App\Http\Controllers\PagesController@create');
+Route::get('/admin/pages/create','App\Http\Controllers\PagesController@create')->middleware(['auth', 'verified']);
 
-Route::get('/admin/pages/', 'App\Http\Controllers\PagesController@index');
-Route::get('/admin', 'App\Http\Controllers\AdminController@index');
+Route::get('/admin/pages/', 'App\Http\Controllers\PagesController@index')->middleware(['auth', 'verified']);
+Route::get('/admin', 'App\Http\Controllers\AdminController@index')->middleware(['auth', 'verified']);
 
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::delete('/admin/pages/{page}/delete', 'App\Http\Controllers\PagesController@destroy');
+
+Route::delete('/admin/pages/{page}/delete', 'App\Http\Controllers\PagesController@destroy')->middleware(['auth', 'verified']);
 
 Route::get('/{page:slug}', 'App\Http\Controllers\PagesController@show');
-Route::get('/admin/pages/{page}/edit', 'App\Http\Controllers\PagesController@edit');
+Route::get('/admin/pages/{page}/edit', 'App\Http\Controllers\PagesController@edit')->middleware(['auth', 'verified']);
 Route::put('/admin/pages/{page}', 'App\Http\Controllers\PagesController@update');
 Route::post('/ckeditor/upload', 'App\Http\Controllers\PagesController@@upload')->name('ckeditor.upload');
 
