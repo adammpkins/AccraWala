@@ -26,7 +26,14 @@
 </template>
 
 <script>
+import { usePage } from '@inertiajs/inertia-vue3'
+
 export default {
+    updated(){
+        if(usePage().props.value.flash.alert){
+            Swal.fire(usePage().props.value.flash.alert);
+        }
+    },
     data() {
         return {
             show: true,

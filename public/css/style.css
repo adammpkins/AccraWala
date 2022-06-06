@@ -30,7 +30,7 @@ body{
 .nav-menu{
     background-color: #000;
     color:#fff;
-    max-width
+    min-height: 100%;
 
 }
 

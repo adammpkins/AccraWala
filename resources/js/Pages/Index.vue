@@ -1,6 +1,5 @@
 <template>
-    <div class="mx-auto py-3 content justify-content-center">
-        <div class="container">
+        <div class="container mt-2">
             <h1 class="float-start">Pages</h1>
         <Link  class="btn green-btn float-end" href="/admin/pages/create">
             <span class="bi bi-plus"></span>New page
@@ -27,7 +26,6 @@
             </tbody>
         </table>
         </div>
-    </div>
 </template>
 
 
@@ -43,10 +41,6 @@ let props = defineProps([
 let destroy = (id) => {
     Inertia.delete('/admin/pages/' + id + '/delete')
 }
-import { usePage } from '@inertiajs/inertia-vue3'
-console.log(usePage().props.value.message)
-
-
 
 </script>
 

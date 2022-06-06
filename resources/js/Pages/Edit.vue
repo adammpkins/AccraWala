@@ -1,5 +1,4 @@
 <template>
-    <div class="mx-auto py-3 content justify-content-center">
         <form @submit.prevent="submit">
 
 
@@ -34,7 +33,7 @@
             </div>
         </form>
 
-    </div>
+
 
 
 
