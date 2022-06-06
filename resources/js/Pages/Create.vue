@@ -47,13 +47,13 @@
                         <option value="bi-arrow-down-circle"><i class="bi-arrow-down-circle" />arrow-down-circle</option>
                         <option value="bi-arrow-down-circle-fill"><i class="bi-arrow-down-circle-fill" />arrow-down-circle-fill</option>
                         <option value="bi-arrow-down-left-circle"><i class="bi-arrow-down-left-circle" />arrow-down-left-circle</option>
-                        <option value="bi-arrow-down-left-">circle-fill<i class="bi-arrow-down-left-circle-fill" />arrow-down-left-circle-fill</option>
+                        <option value="bi-arrow-down-left-circle-fill"><i class="bi-arrow-down-left-circle-fill" />arrow-down-left-circle-fill</option>
                         <option value="bi-arrow-down-left-square"><i class="bi-arrow-down-left-square" />arrow-down-left-square</option>
-                        <option value="bi-arrow-down-left-">square-fill<i class="bi-arrow-down-left-square-fill" />arrow-down-left-square-fill</option>
+                        <option value="bi-arrow-down-left-square-fill"><i class="bi-arrow-down-left-square-fill" />arrow-down-left-square-fill</option>
                         <option value="bi-arrow-down-right-circle"><i class="bi-arrow-down-right-circle" />arrow-down-right-circle</option>
-                        <option value="bi-arrow-down-right">-circle-fill<i class="bi-arrow-down-right-circle-fill" />arrow-down-right-circle-fill</option>
+                        <option value="bi-arrow-down-right-circle-fill"><i class="bi-arrow-down-right-circle-fill" />arrow-down-right-circle-fill</option>
                         <option value="bi-arrow-down-right-square"><i class="bi-arrow-down-right-square" />arrow-down-right-square</option>
-                        <option value="bi-arrow-down-right">-square-fill<i class="bi-arrow-down-right-square-fill" />arrow-down-right-square-fill</option>
+                        <option value="bi-arrow-down-right-square-fill"><i class="bi-arrow-down-right-square-fill" />arrow-down-right-square-fill</option>
                         <option value="bi-arrow-down-square"><i class="bi-arrow-down-square" />arrow-down-square</option>
                         <option value="bi-arrow-down-square-fill"><i class="bi-arrow-down-square-fill" />arrow-down-square-fill</option>
                         <option value="bi-arrow-down-left"><i class="bi-arrow-down-left" />arrow-down-left</option>
@@ -82,13 +82,13 @@
                         <option value="bi-arrow-up-circle"><i class="bi-arrow-up-circle" />arrow-up-circle</option>
                         <option value="bi-arrow-up-circle-fill"><i class="bi-arrow-up-circle-fill" />arrow-up-circle-fill</option>
                         <option value="bi-arrow-up-left-circle"><i class="bi-arrow-up-left-circle" />arrow-up-left-circle</option>
-                        <option value="bi-arrow-up-left-ci">rcle-fill<i class="bi-arrow-up-left-circle-fill" />arrow-up-left-circle-fill</option>
+                        <option value="bi-arrow-up-left-circle-fill"><i class="bi-arrow-up-left-circle-fill" />arrow-up-left-circle-fill</option>
                         <option value="bi-arrow-up-left-square"><i class="bi-arrow-up-left-square" />arrow-up-left-square</option>
-                        <option value="bi-arrow-up-left-sq">uare-fill<i class="bi-arrow-up-left-square-fill" />arrow-up-left-square-fill</option>
+                        <option value="bi-arrow-up-left-square-fill"><i class="bi-arrow-up-left-square-fill" />arrow-up-left-square-fill</option>
                         <option value="bi-arrow-up-right-circle"><i class="bi-arrow-up-right-circle" />arrow-up-right-circle</option>
-                        <option value="bi-arrow-up-right-c">ircle-fill<i class="bi-arrow-up-right-circle-fill" />arrow-up-right-circle-fill</option>
+                        <option value="bi-arrow-up-right-circle-fill"><i class="bi-arrow-up-right-circle-fill" />arrow-up-right-circle-fill</option>
                         <option value="bi-arrow-up-right-square"><i class="bi-arrow-up-right-square" />arrow-up-right-square</option>
-                        <option value="bi-arrow-up-right-s">quare-fill<i class="bi-arrow-up-right-square-fill" />arrow-up-right-square-fill</option>
+                        <option value="bi-arrow-up-right-square-fill"><i class="bi-arrow-up-right-square-fill" />arrow-up-right-square-fill</option>
                         <option value="bi-arrow-up-square"><i class="bi-arrow-up-square" />arrow-up-square</option>
                         <option value="bi-arrow-up-square-fill"><i class="bi-arrow-up-square-fill" />arrow-up-square-fill</option>
                         <option value="bi-arrow-up-left"><i class="bi-arrow-up-left" />arrow-up-left</option>
@@ -515,7 +515,7 @@
                         <option value="bi-cloud-lightning"><i class="bi-cloud-lightning" />cloud-lightning</option>
                         <option value="bi-cloud-lightning-fill"><i class="bi-cloud-lightning-fill" />cloud-lightning-fill</option>
                         <option value="bi-cloud-lightning-rain"><i class="bi-cloud-lightning-rain" />cloud-lightning-rain</option>
-                        <option value="bi-cloud-lightning-">rain-fill<i class="bi-cloud-lightning-rain-fill" />cloud-lightning-rain-fill</option>
+                        <option value="bi-cloud-lightning-rain-fill"><i class="bi-cloud-lightning-rain-fill" />cloud-lightning-rain-fill</option>
                         <option value="bi-cloud-minus"><i class="bi-cloud-minus" />cloud-minus</option>
                         <option value="bi-cloud-minus-fill"><i class="bi-cloud-minus-fill" />cloud-minus-fill</option>
                         <option value="bi-cloud-moon"><i class="bi-cloud-moon" />cloud-moon</option>
@@ -648,7 +648,7 @@
                         <option value="bi-emoji-dizzy"><i class="bi-emoji-dizzy" />emoji-dizzy</option>
                         <option value="bi-emoji-dizzy-fill"><i class="bi-emoji-dizzy-fill" />emoji-dizzy-fill</option>
                         <option value="bi-emoji-expressionless"><i class="bi-emoji-expressionless" />emoji-expressionless</option>
-                        <option value="bi-emoji-expression">less-fill<i class="bi-emoji-expressionless-fill" />emoji-expressionless-fill</option>
+                        <option value="bi-emoji-expressionless-fill"><i class="bi-emoji-expressionless-fill" />emoji-expressionless-fill</option>
                         <option value="bi-emoji-frown"><i class="bi-emoji-frown" />emoji-frown</option>
                         <option value="bi-emoji-frown-fill"><i class="bi-emoji-frown-fill" />emoji-frown-fill</option>
                         <option value="bi-emoji-heart-eyes"><i class="bi-emoji-heart-eyes" />emoji-heart-eyes</option>
@@ -662,7 +662,7 @@
                         <option value="bi-emoji-smile"><i class="bi-emoji-smile" />emoji-smile</option>
                         <option value="bi-emoji-smile-fill"><i class="bi-emoji-smile-fill" />emoji-smile-fill</option>
                         <option value="bi-emoji-smile-upside-down"><i class="bi-emoji-smile-upside-down" />emoji-smile-upside-down</option>
-                        <option value="bi-emoji-smile-upsi">de-down-fill<i class="bi-emoji-smile-upside-down-fill" />emoji-smile-upside-down-fill</option>
+                        <option value="bi-emoji-smile-upside-down-fill"><i class="bi-emoji-smile-upside-down-fill" />emoji-smile-upside-down-fill</option>
                         <option value="bi-emoji-sunglasses"><i class="bi-emoji-sunglasses" />emoji-sunglasses</option>
                         <option value="bi-emoji-sunglasses-fill"><i class="bi-emoji-sunglasses-fill" />emoji-sunglasses-fill</option>
                         <option value="bi-emoji-wink"><i class="bi-emoji-wink" />emoji-wink</option>
@@ -673,7 +673,7 @@
                         <option value="bi-envelope-dash"><i class="bi-envelope-dash" />envelope-dash</option>
                         <option value="bi-envelope-dash-fill"><i class="bi-envelope-dash-fill" />envelope-dash-fill</option>
                         <option value="bi-envelope-exclamation"><i class="bi-envelope-exclamation" />envelope-exclamation</option>
-                        <option value="bi-envelope-exclama">tion-fill<i class="bi-envelope-exclamation-fill" />envelope-exclamation-fill</option>
+                        <option value="bi-envelope-exclamation-fill"><i class="bi-envelope-exclamation-fill" />envelope-exclamation-fill</option>
                         <option value="bi-envelope-fill"><i class="bi-envelope-fill" />envelope-fill</option>
                         <option value="bi-envelope-heart"><i class="bi-envelope-heart" />envelope-heart</option>
                         <option value="bi-envelope-heart-fill"><i class="bi-envelope-heart-fill" />envelope-heart-fill</option>
@@ -684,7 +684,7 @@
                         <option value="bi-envelope-paper"><i class="bi-envelope-paper" />envelope-paper</option>
                         <option value="bi-envelope-paper-fill"><i class="bi-envelope-paper-fill" />envelope-paper-fill</option>
                         <option value="bi-envelope-paper-heart"><i class="bi-envelope-paper-heart" />envelope-paper-heart</option>
-                        <option value="bi-envelope-paper-h">eart-fill<i class="bi-envelope-paper-heart-fill" />envelope-paper-heart-fill</option>
+                        <option value="bi-envelope-paper-heart-fill"><i class="bi-envelope-paper-heart-fill" />envelope-paper-heart-fill</option>
                         <option value="bi-envelope-plus"><i class="bi-envelope-plus" />envelope-plus</option>
                         <option value="bi-envelope-plus-fill"><i class="bi-envelope-plus-fill" />envelope-plus-fill</option>
                         <option value="bi-envelope-slash"><i class="bi-envelope-slash" />envelope-slash</option>
@@ -705,7 +705,7 @@
                         <option value="bi-exclamation-square"><i class="bi-exclamation-square" />exclamation-square</option>
                         <option value="bi-exclamation-square-fill"><i class="bi-exclamation-square-fill" />exclamation-square-fill</option>
                         <option value="bi-exclamation-triangle"><i class="bi-exclamation-triangle" />exclamation-triangle</option>
-                        <option value="bi-exclamation-tria">ngle-fill<i class="bi-exclamation-triangle-fill" />exclamation-triangle-fill</option>
+                        <option value="bi-exclamation-triangle-fill"><i class="bi-exclamation-triangle-fill" />exclamation-triangle-fill</option>
                         <option value="bi-exclude"><i class="bi-exclude" />exclude</option>
                         <option value="bi-explicit"><i class="bi-explicit" />explicit</option>
                         <option value="bi-explicit-fill"><i class="bi-explicit-fill" />explicit-fill</option>
@@ -736,11 +736,11 @@
                         <option value="bi-file-diff-fill"><i class="bi-file-diff-fill" />file-diff-fill</option>
                         <option value="bi-file-earmark"><i class="bi-file-earmark" />file-earmark</option>
                         <option value="bi-file-earmark-arrow-down"><i class="bi-file-earmark-arrow-down" />file-earmark-arrow-down</option>
-                        <option value="bi-file-earmark-arr">ow-down-fill<i class="bi-file-earmark-arrow-down-fill" />file-earmark-arrow-down-fill</option>
+                        <option value="bi-file-earmark-arrow-down-fill"><i class="bi-file-earmark-arrow-down-fill" />file-earmark-arrow-down-fill</option>
                         <option value="bi-file-earmark-arrow-up"><i class="bi-file-earmark-arrow-up" />file-earmark-arrow-up</option>
-                        <option value="bi-file-earmark-arr">ow-up-fill<i class="bi-file-earmark-arrow-up-fill" />file-earmark-arrow-up-fill</option>
+                        <option value="bi-file-earmark-arrow-up-fill"><i class="bi-file-earmark-arrow-up-fill" />file-earmark-arrow-up-fill</option>
                         <option value="bi-file-earmark-bar-graph"><i class="bi-file-earmark-bar-graph" />file-earmark-bar-graph</option>
-                        <option value="bi-file-earmark-bar">-graph-fill<i class="bi-file-earmark-bar-graph-fill" />file-earmark-bar-graph-fill</option>
+                        <option value="bi-file-earmark-bar-graph-fill"><i class="bi-file-earmark-bar-graph-fill" />file-earmark-bar-graph-fill</option>
                         <option value="bi-file-earmark-binary"><i class="bi-file-earmark-binary" />file-earmark-binary</option>
                         <option value="bi-file-earmark-binary-fill"><i class="bi-file-earmark-binary-fill" />file-earmark-binary-fill</option>
                         <option value="bi-file-earmark-break"><i class="bi-file-earmark-break" />file-earmark-break</option>
@@ -765,7 +765,7 @@
                         <option value="bi-file-earmark-lock2"><i class="bi-file-earmark-lock2" />file-earmark-lock2</option>
                         <option value="bi-file-earmark-lock2-fill"><i class="bi-file-earmark-lock2-fill" />file-earmark-lock2-fill</option>
                         <option value="bi-file-earmark-medical"><i class="bi-file-earmark-medical" />file-earmark-medical</option>
-                        <option value="bi-file-earmark-med">ical-fill<i class="bi-file-earmark-medical-fill" />file-earmark-medical-fill</option>
+                        <option value="bi-file-earmark-medical-fill"><i class="bi-file-earmark-medical-fill" />file-earmark-medical-fill</option>
                         <option value="bi-file-earmark-minus"><i class="bi-file-earmark-minus" />file-earmark-minus</option>
                         <option value="bi-file-earmark-minus-fill"><i class="bi-file-earmark-minus-fill" />file-earmark-minus-fill</option>
                         <option value="bi-file-earmark-music"><i class="bi-file-earmark-music" />file-earmark-music</option>
@@ -783,13 +783,13 @@
                         <option value="bi-file-earmark-ppt"><i class="bi-file-earmark-ppt" />file-earmark-ppt</option>
                         <option value="bi-file-earmark-ppt-fill"><i class="bi-file-earmark-ppt-fill" />file-earmark-ppt-fill</option>
                         <option value="bi-file-earmark-richtext"><i class="bi-file-earmark-richtext" />file-earmark-richtext</option>
-                        <option value="bi-file-earmark-ric">htext-fill<i class="bi-file-earmark-richtext-fill" />file-earmark-richtext-fill</option>
+                        <option value="bi-file-earmark-richtext-fill"><i class="bi-file-earmark-richtext-fill" />file-earmark-richtext-fill</option>
                         <option value="bi-file-earmark-ruled"><i class="bi-file-earmark-ruled" />file-earmark-ruled</option>
                         <option value="bi-file-earmark-ruled-fill"><i class="bi-file-earmark-ruled-fill" />file-earmark-ruled-fill</option>
                         <option value="bi-file-earmark-slides"><i class="bi-file-earmark-slides" />file-earmark-slides</option>
                         <option value="bi-file-earmark-slides-fill"><i class="bi-file-earmark-slides-fill" />file-earmark-slides-fill</option>
                         <option value="bi-file-earmark-spreadsheet"><i class="bi-file-earmark-spreadsheet" />file-earmark-spreadsheet</option>
-                        <option value="bi-file-earmark-spr">eadsheet-fill<i class="bi-file-earmark-spreadsheet-fill" />file-earmark-spreadsheet-fill</option>
+                        <option value="bi-file-earmark-spreadsheet-fill"><i class="bi-file-earmark-spreadsheet-fill" />file-earmark-spreadsheet-fill</option>
                         <option value="bi-file-earmark-text"><i class="bi-file-earmark-text" />file-earmark-text</option>
                         <option value="bi-file-earmark-text-fill"><i class="bi-file-earmark-text-fill" />file-earmark-text-fill</option>
                         <option value="bi-file-earmark-word"><i class="bi-file-earmark-word" />file-earmark-word</option>
@@ -1074,14 +1074,14 @@
                         <option value="bi-layers-fill"><i class="bi-layers-fill" />layers-fill</option>
                         <option value="bi-layers-half"><i class="bi-layers-half" />layers-half</option>
                         <option value="bi-layout-sidebar"><i class="bi-layout-sidebar" />layout-sidebar</option>
-                        <option value="bi-layout-sidebar-i">nset-reverse<i class="bi-layout-sidebar-inset-reverse" />layout-sidebar-inset-reverse</option>
+                        <option value="bi-layout-sidebar-inset-reverse"><i class="bi-layout-sidebar-inset-reverse" />layout-sidebar-inset-reverse</option>
                         <option value="bi-layout-sidebar-inset"><i class="bi-layout-sidebar-inset" />layout-sidebar-inset</option>
                         <option value="bi-layout-sidebar-reverse"><i class="bi-layout-sidebar-reverse" />layout-sidebar-reverse</option>
                         <option value="bi-layout-split"><i class="bi-layout-split" />layout-split</option>
                         <option value="bi-layout-text-sidebar"><i class="bi-layout-text-sidebar" />layout-text-sidebar</option>
-                        <option value="bi-layout-text-side">bar-reverse<i class="bi-layout-text-sidebar-reverse" />layout-text-sidebar-reverse</option>
+                        <option value="bi-layout-text-sidebar-reverse"><i class="bi-layout-text-sidebar-reverse" />layout-text-sidebar-reverse</option>
                         <option value="bi-layout-text-window"><i class="bi-layout-text-window" />layout-text-window</option>
-                        <option value="bi-layout-text-wind">ow-reverse<i class="bi-layout-text-window-reverse" />layout-text-window-reverse</option>
+                        <option value="bi-layout-text-window-reverse"><i class="bi-layout-text-window-reverse" />layout-text-window-reverse</option>
                         <option value="bi-layout-three-columns"><i class="bi-layout-three-columns" />layout-three-columns</option>
                         <option value="bi-layout-wtf"><i class="bi-layout-wtf" />layout-wtf</option>
                         <option value="bi-life-preserver"><i class="bi-life-preserver" />life-preserver</option>
@@ -1406,7 +1406,7 @@
                         <option value="bi-skip-backward-btn"><i class="bi-skip-backward-btn" />skip-backward-btn</option>
                         <option value="bi-skip-backward-btn-fill"><i class="bi-skip-backward-btn-fill" />skip-backward-btn-fill</option>
                         <option value="bi-skip-backward-circle"><i class="bi-skip-backward-circle" />skip-backward-circle</option>
-                        <option value="bi-skip-backward-ci">rcle-fill<i class="bi-skip-backward-circle-fill" />skip-backward-circle-fill</option>
+                        <option value="bi-skip-backward-circle-fill"><i class="bi-skip-backward-circle-fill" />skip-backward-circle-fill</option>
                         <option value="bi-skip-backward-fill"><i class="bi-skip-backward-fill" />skip-backward-fill</option>
                         <option value="bi-skip-end"><i class="bi-skip-end" />skip-end</option>
                         <option value="bi-skip-end-btn"><i class="bi-skip-end-btn" />skip-end-btn</option>
@@ -1706,7 +1706,7 @@
         </div>
         </form>
 
-  
+
 
 
 
