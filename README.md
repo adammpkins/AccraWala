@@ -22,6 +22,10 @@ Initialize and run the docker container
 
     sail up
 
+Migrate the database
+
+    sail artisan migrate
+
 Next, if this is the first installation, install the NPM dependencies.
 
     sail npm install
