@@ -61,6 +61,23 @@ width:100%;
     min-height: 90vh!important;
 
 }
+.x-btn{
+    background-color:transparent;
+    border:none;
+    position: relative;
+    top: -15px;
+    left: 15px;
+    color:#0f5132;
+}
+
+.x-btn-err{
+    background-color: transparent;
+    border:none;
+    position: relative;
+    top: -35px;
+    left: 15px;
+    color:#842029;
+}
 
 .nav-link.red:hover, .nav-link.red:focus, .nav-link.red:active {
     color:#CF0921;

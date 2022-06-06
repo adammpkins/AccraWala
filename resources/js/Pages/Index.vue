@@ -30,6 +30,8 @@
     </div>
 </template>
 
+
+
 <script setup>
 import {Link} from "@inertiajs/inertia-vue3";
 import {useForm} from "@inertiajs/inertia-vue3"
@@ -39,8 +41,12 @@ let props = defineProps([
 ])
 
 let destroy = (id) => {
-    Inertia.delete('/admin/pages/' +id + '/delete')
+    Inertia.delete('/admin/pages/' + id + '/delete')
 }
+import { usePage } from '@inertiajs/inertia-vue3'
+console.log(usePage().props.value.message)
+
+
 
 </script>
 

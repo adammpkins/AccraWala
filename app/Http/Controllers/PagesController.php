@@ -8,8 +8,9 @@ use Inertia\Inertia;
 
 class PagesController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+
         $pages = Page::all();
 
         return Inertia::render('Index', [
@@ -29,12 +30,12 @@ class PagesController extends Controller
         $page->body = $request->body;
         $page->icon = $request->icon;
         $page->save();
-        return redirect('/admin/pages');
+        return redirect('/admin/pages')->with('success', 'Page created successfully');
     }
     public function destroy(Page $page)
     {
         $page->delete();
-        return redirect('/admin/pages');
+        return redirect('/admin/pages')->with('success', 'Page deleted successfully.');
     }
 
     public function show(Page $page)

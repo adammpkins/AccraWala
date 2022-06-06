@@ -44,6 +44,12 @@ class HandleInertiaRequests extends Middleware
                 return (new Ziggy)->toArray();
             },
             'pages' => $pages,
+            'flash' => function () use ($request) {
+            return [
+                'success' => $request->session()->get('success'),
+                'error' => $request->session()->get('error'),
+            ];
+            },
         ]);
     }
 }

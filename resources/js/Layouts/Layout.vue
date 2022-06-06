@@ -1,6 +1,5 @@
 <template>
 
-
     <div class="row top-bar">
         <div class="col-12">
             <img src="/img/aw-logo.jpg" class="my-4 aw-logo float-start" alt="" />
@@ -11,17 +10,24 @@
     </div>
     <div class="row div-wrap">
     <Nav />
-    <slot />
+        <div class="mx-auto content">
+
+        <flash-messages />
+
+        <slot />
+        </div>
     </div>
 </template>
 
 <script>
 import Nav from "@/Components/Nav";
+import FlashMessages from "@/Components/FlashMessages";
 import { Link } from "@inertiajs/inertia-vue3";
 export default {
     components: {
         Nav,
-        Link
+        Link,
+        FlashMessages
     }
 }
 </script>

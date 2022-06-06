@@ -26,6 +26,8 @@ defineProps({
         <title>Admin</title>
     </Head>
 
+
+
     <div class="mx-auto content">
         <h1>Admin</h1>
         <ul>
