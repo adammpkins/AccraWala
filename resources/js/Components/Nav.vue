@@ -46,7 +46,7 @@ components: {
                 </li>
             </ul>
             <hr>
-            <div class="dropdown pb-5" v-if="$page.props.auth.user">
+            <div class="dropdown pb-3" v-if="$page.props.auth.user">
                 <Link href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                       id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                     <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
