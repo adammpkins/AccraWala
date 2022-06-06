@@ -4,7 +4,17 @@
 This project was written in Laravel 8 using Vue3 and InertiaJS. For mapping, it utilizes the Leaflet JS library for OpenStreetMap mapping.
 
 # Installation
-First, install the application and its composer dependencies.
+First, clone the repository.
+
+Via SSH:
+
+    git clone git@bitbucket.org:adammpkins/accrawala.git
+
+Via HTTPS:
+
+    git clone https://adammpkins@bitbucket.org/adammpkins/accrawala.git
+
+Then, install the application and its composer dependencies.
 
     composer install
 
