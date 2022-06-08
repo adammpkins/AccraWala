@@ -1,7 +1,7 @@
 
 <script setup>
 import "leaflet/dist/leaflet.css"
-import { LMap, LTileLayer, LGeoJson } from "@vue-leaflet/vue-leaflet";
+import { LMap, LTileLayer, LGeoJson, LPolyline } from "@vue-leaflet/vue-leaflet";
 
 
 
@@ -23,6 +23,7 @@ export default {
     components: {
         LMap,
         LTileLayer,
+        LPolyline
     },
     data() {
         return {
@@ -48,6 +49,13 @@ export default {
                 layer-type="base"
                 name="OpenStreetMap"
             ></l-tile-layer>
+            <l-polyline
+                :lat-lngs="[
+        [5.59, -0.19],
+        [5.57, -0.30],
+      ]"
+                color="green"
+            />
         </l-map>
 
 </template>

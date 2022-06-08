@@ -23786,7 +23786,8 @@ __webpack_require__.r(__webpack_exports__);
 var __default__ = {
   components: {
     LMap: _vue_leaflet_vue_leaflet__WEBPACK_IMPORTED_MODULE_0__.LMap,
-    LTileLayer: _vue_leaflet_vue_leaflet__WEBPACK_IMPORTED_MODULE_0__.LTileLayer
+    LTileLayer: _vue_leaflet_vue_leaflet__WEBPACK_IMPORTED_MODULE_0__.LTileLayer,
+    LPolyline: _vue_leaflet_vue_leaflet__WEBPACK_IMPORTED_MODULE_0__.LPolyline
   },
   data: function data() {
     return {
@@ -23810,7 +23811,8 @@ var __default__ = {
     var __returned__ = {
       LMap: _vue_leaflet_vue_leaflet__WEBPACK_IMPORTED_MODULE_0__.LMap,
       LTileLayer: _vue_leaflet_vue_leaflet__WEBPACK_IMPORTED_MODULE_0__.LTileLayer,
-      LGeoJson: _vue_leaflet_vue_leaflet__WEBPACK_IMPORTED_MODULE_0__.LGeoJson
+      LGeoJson: _vue_leaflet_vue_leaflet__WEBPACK_IMPORTED_MODULE_0__.LGeoJson,
+      LPolyline: _vue_leaflet_vue_leaflet__WEBPACK_IMPORTED_MODULE_0__.LPolyline
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -26035,7 +26037,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
         "layer-type": "base",
         name: "OpenStreetMap"
-      })];
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["LPolyline"], {
+        "lat-lngs": [[5.59, -0.19], [5.57, -0.30]],
+        color: "green"
+      }, null, 8
+      /* PROPS */
+      , ["lat-lngs"])];
     }),
     _: 1
     /* STABLE */
