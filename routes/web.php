@@ -42,5 +42,5 @@ Route::delete('/admin/pages/{page}/delete', 'App\Http\Controllers\PagesControlle
 Route::get('/{page:slug}', 'App\Http\Controllers\PagesController@show');
 Route::get('/admin/pages/{page}/edit', 'App\Http\Controllers\PagesController@edit')->middleware(['auth', 'verified']);
 Route::put('/admin/pages/{page}', 'App\Http\Controllers\PagesController@update');
-Route::post('/ckeditor/upload', 'App\Http\Controllers\PagesController@@upload')->name('ckeditor.upload');
+Route::post('/ckeditor/upload', 'App\Http\Controllers\PagesController@upload')->name('ckeditor.upload');
 

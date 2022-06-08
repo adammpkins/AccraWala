@@ -8,7 +8,7 @@
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
-
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <!-- Styles -->
         <link href="{{ URL::asset('css/bootstrap.min.css')}}" rel="stylesheet">
         <link href="{{ URL::asset('css/style.css')}}" rel="stylesheet">
@@ -17,6 +17,7 @@
         @routes
         <script src="{{ mix('js/app.js') }}" defer></script>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

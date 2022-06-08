@@ -30,7 +30,7 @@ body{
 .nav-menu{
     background-color: #000;
     color:#fff;
-    height: 90%;
+    min-height: 90%;
 
 }
 
