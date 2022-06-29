@@ -1,9 +1,10 @@
 <?php
 
 use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-require __DIR__.'/auth.php';
+use App\Models\Route as RouteModel;
+
+require __DIR__ . '/auth.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -17,11 +18,14 @@ require __DIR__.'/auth.php';
 */
 
 Route::get('/', function () {
-    return Inertia::render('Home', [
+    $routes = RouteModel::whereHas('shapes')->get();
+    $routeShapes = $routes->load('shapes');
+     return Inertia::render('Home', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
+         'routeShapes' => $routeShapes
     ]);
 });
 
@@ -29,7 +33,7 @@ Route::get('/', function () {
 
 Route::post('/admin/pages', 'App\Http\Controllers\PagesController@store')->middleware(['auth', 'verified']);
 
-Route::get('/admin/pages/create','App\Http\Controllers\PagesController@create')->middleware(['auth', 'verified']);
+Route::get('/admin/pages/create', 'App\Http\Controllers\PagesController@create')->middleware(['auth', 'verified']);
 
 Route::get('/admin/pages/', 'App\Http\Controllers\PagesController@index')->middleware(['auth', 'verified']);
 Route::get('/admin', 'App\Http\Controllers\AdminController@index')->middleware(['auth', 'verified']);
@@ -43,4 +47,3 @@ Route::get('/{page:slug}', 'App\Http\Controllers\PagesController@show');
 Route::get('/admin/pages/{page}/edit', 'App\Http\Controllers\PagesController@edit')->middleware(['auth', 'verified']);
 Route::put('/admin/pages/{page}', 'App\Http\Controllers\PagesController@update');
 Route::post('/ckeditor/upload', 'App\Http\Controllers\PagesController@upload')->name('ckeditor.upload');
-
