@@ -26058,14 +26058,17 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["LMap"], {
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("    <div v-for=\"(routeShape, index) in routeShapes\" :key=\"index\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("        {{ routeShape.routeid }} {{ routeShape.routename }}"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("    </div>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["LMap"], {
     id: "map",
     ref: "map",
     zoom: $data.zoom,
     "onUpdate:zoom": _cache[0] || (_cache[0] = function ($event) {
       return $data.zoom = $event;
     }),
-    center: [5.59, -0.27]
+    center: [5.59, -0.27],
+    options: {
+      preferCanvas: true
+    }
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["LTileLayer"], {
@@ -26073,6 +26076,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "min-zoom": 12,
         "layer-type": "base",
         name: "OpenStreetMap",
+        updateWhenIdle: "true",
         url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       }), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.stations, function (station) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["LMarker"], {

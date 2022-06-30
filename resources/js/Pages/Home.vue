@@ -47,13 +47,20 @@ export default {
         <title>Home</title>
     </Head>
 
-    <l-map id="map" ref="map" v-model:zoom="zoom" :center="[5.59, -0.27]">
+    <!--    <div v-for="(routeShape, index) in routeShapes" :key="index">-->
+    <!--        {{ routeShape.routeid }} {{ routeShape.routename }}-->
+
+    <!--    </div>-->
+
+
+    <l-map id="map" ref="map" v-model:zoom="zoom" :center="[5.59, -0.27]" :options="{preferCanvas: true}">
 
         <l-tile-layer
             :max-zoom="15"
             :min-zoom="12"
             layer-type="base"
             name="OpenStreetMap"
+            updateWhenIdle="true"
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         ></l-tile-layer>
 
@@ -66,8 +73,9 @@ export default {
             <l-popup>
                 <p><strong>Station:</strong> {{ station.stationname }}</p>
                 <p><strong>Station Number:</strong> {{ station.stationid }}</p>
-                <p><strong><a :href="'https://www.google.com/maps/@?api=1&map_action=pano&viewpoint='+ station.lat +'%2C' + station.lon +'&heading=45&pitch=0&fov=80'"
-                              target="_blank">Google
+                <p><strong><a
+                    :href="'https://www.google.com/maps/@?api=1&map_action=pano&viewpoint='+ station.lat +'%2C' + station.lon +'&heading=45&pitch=0&fov=80'"
+                    target="_blank">Google
                     Street View</a></strong></p>
             </l-popup>
         </l-marker>
