@@ -57,6 +57,7 @@ export default {
                 layer-type="base"
                 name="OpenStreetMap"
                 :max-zoom="15"
+                :min-zoom="12"
             ></l-tile-layer>
             <l-marker
                 v-for="station in stations"

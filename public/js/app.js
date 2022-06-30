@@ -26049,7 +26049,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
         "layer-type": "base",
         name: "OpenStreetMap",
-        "max-zoom": 15
+        "max-zoom": 15,
+        "min-zoom": 12
       }), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.stations, function (station) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["LMarker"], {
           keyboard: "true",
