@@ -26093,7 +26093,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                 )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(station.stationid), 1
                 /* TEXT */
                 )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-                  href: 'https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=' + station.lat + '%2C' + station.lon + '&heading=45&pitch=0&fov=80'
+                  href: 'https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=' + station.lat + '%2C' + station.lon + '&heading=45&pitch=0&fov=80',
+                  target: "_blank"
                 }, "Google Street View", 8
                 /* PROPS */
                 , _hoisted_4)])])];

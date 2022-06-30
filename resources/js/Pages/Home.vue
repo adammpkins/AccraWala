@@ -66,8 +66,8 @@ export default {
             <l-popup>
                 <p><strong>Station:</strong> {{ station.stationname }}</p>
                 <p><strong>Station Number:</strong> {{ station.stationid }}</p>
-                <p><strong><a
-                    :href="'https://www.google.com/maps/@?api=1&map_action=pano&viewpoint='+ station.lat +'%2C' + station.lon +'&heading=45&pitch=0&fov=80'">Google
+                <p><strong><a :href="'https://www.google.com/maps/@?api=1&map_action=pano&viewpoint='+ station.lat +'%2C' + station.lon +'&heading=45&pitch=0&fov=80'"
+                              target="_blank">Google
                     Street View</a></strong></p>
             </l-popup>
         </l-marker>
