@@ -23781,15 +23781,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var leaflet_dist_leaflet_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! leaflet/dist/leaflet.css */ "./node_modules/leaflet/dist/leaflet.css");
-/* harmony import */ var _vue_leaflet_vue_leaflet__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @vue-leaflet/vue-leaflet */ "./node_modules/@vue-leaflet/vue-leaflet/dist/vue-leaflet.esm.js");
+/* harmony import */ var leaflet_dist_leaflet_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! leaflet/dist/leaflet.css */ "./node_modules/leaflet/dist/leaflet.css");
+/* harmony import */ var _vue_leaflet_vue_leaflet__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @vue-leaflet/vue-leaflet */ "./node_modules/@vue-leaflet/vue-leaflet/dist/vue-leaflet.esm.js");
 var __default__ = {
-  components: {
-    LMap: _vue_leaflet_vue_leaflet__WEBPACK_IMPORTED_MODULE_0__.LMap,
-    LTileLayer: _vue_leaflet_vue_leaflet__WEBPACK_IMPORTED_MODULE_0__.LTileLayer,
-    LPolyline: _vue_leaflet_vue_leaflet__WEBPACK_IMPORTED_MODULE_0__.LPolyline,
-    LMarker: _vue_leaflet_vue_leaflet__WEBPACK_IMPORTED_MODULE_0__.LMarker
-  },
   data: function data() {
     return {
       zoom: 13
@@ -23817,17 +23811,20 @@ var __default__ = {
     canRegister: Boolean,
     laravelVersion: String,
     phpVersion: String,
-    routeShapes: Object
+    routeShapes: Object,
+    stations: Object
   },
   setup: function setup(__props, _ref) {
     var expose = _ref.expose;
     expose();
     var __returned__ = {
-      LMap: _vue_leaflet_vue_leaflet__WEBPACK_IMPORTED_MODULE_0__.LMap,
-      LTileLayer: _vue_leaflet_vue_leaflet__WEBPACK_IMPORTED_MODULE_0__.LTileLayer,
-      LGeoJson: _vue_leaflet_vue_leaflet__WEBPACK_IMPORTED_MODULE_0__.LGeoJson,
-      LPolyline: _vue_leaflet_vue_leaflet__WEBPACK_IMPORTED_MODULE_0__.LPolyline,
-      LMarker: _vue_leaflet_vue_leaflet__WEBPACK_IMPORTED_MODULE_0__.LMarker
+      LMap: _vue_leaflet_vue_leaflet__WEBPACK_IMPORTED_MODULE_1__.LMap,
+      LTileLayer: _vue_leaflet_vue_leaflet__WEBPACK_IMPORTED_MODULE_1__.LTileLayer,
+      LGeoJson: _vue_leaflet_vue_leaflet__WEBPACK_IMPORTED_MODULE_1__.LGeoJson,
+      LPolyline: _vue_leaflet_vue_leaflet__WEBPACK_IMPORTED_MODULE_1__.LPolyline,
+      LMarker: _vue_leaflet_vue_leaflet__WEBPACK_IMPORTED_MODULE_1__.LMarker,
+      LCircleMarker: _vue_leaflet_vue_leaflet__WEBPACK_IMPORTED_MODULE_1__.LCircleMarker,
+      LIcon: _vue_leaflet_vue_leaflet__WEBPACK_IMPORTED_MODULE_1__.LIcon
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -26051,8 +26048,31 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["LTileLayer"], {
         url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
         "layer-type": "base",
-        name: "OpenStreetMap"
-      }), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($options.polylines, function (polyline, index) {
+        name: "OpenStreetMap",
+        "max-zoom": 15
+      }), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.stations, function (station) {
+        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["LMarker"], {
+          keyboard: "true",
+          autoPanOnFocus: "true",
+          "lat-lng": [station.lat, station.lon]
+        }, {
+          "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+            return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["LIcon"], {
+              "icon-url": '/img/bus.png',
+              "icon-size": 15
+            }, null, 8
+            /* PROPS */
+            , ["icon-url"])];
+          }),
+          _: 2
+          /* DYNAMIC */
+
+        }, 1032
+        /* PROPS, DYNAMIC_SLOTS */
+        , ["lat-lng"]);
+      }), 256
+      /* UNKEYED_FRAGMENT */
+      )), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($options.polylines, function (polyline, index) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["LPolyline"], {
           key: index,
           "lat-lngs": polyline,

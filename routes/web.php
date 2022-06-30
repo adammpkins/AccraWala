@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Station;
 use Illuminate\Foundation\Application;
 use Inertia\Inertia;
 use App\Models\Route as RouteModel;
@@ -20,12 +21,14 @@ require __DIR__ . '/auth.php';
 Route::get('/', function () {
     $routes = RouteModel::whereHas('shapes')->get();
     $routeShapes = $routes->load('shapes');
+    $stations = Station::all();
      return Inertia::render('Home', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
-         'routeShapes' => $routeShapes
+         'routeShapes' => $routeShapes,
+         'stations' => $stations
     ]);
 });
 

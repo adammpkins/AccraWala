@@ -1,7 +1,7 @@
 
 <script setup>
 import "leaflet/dist/leaflet.css"
-import { LMap, LTileLayer, LGeoJson, LPolyline, LMarker } from "@vue-leaflet/vue-leaflet";
+import { LMap, LTileLayer, LGeoJson, LPolyline, LMarker, LCircleMarker, LIcon } from "@vue-leaflet/vue-leaflet";
 
 
 defineProps({
@@ -10,6 +10,7 @@ defineProps({
     laravelVersion: String,
     phpVersion: String,
     routeShapes: Object,
+    stations: Object
 
 });
 
@@ -17,16 +18,8 @@ defineProps({
 
 </script>
 <script>
-
 export default {
 
-
-    components: {
-        LMap,
-        LTileLayer,
-        LPolyline,
-        LMarker
-    },
     data() {
         return {
             zoom: 13,
@@ -56,13 +49,23 @@ export default {
 <!--<div v-for="(polyline, index) in polylines">-->
 <!--    {{index}}-->
 <!--</div>-->
+
         <l-map ref="map" id="map" v-model:zoom="zoom" :center="[5.59, -0.27]">
 
             <l-tile-layer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 layer-type="base"
                 name="OpenStreetMap"
+                :max-zoom="15"
             ></l-tile-layer>
+            <l-marker
+                v-for="station in stations"
+                keyboard="true" autoPanOnFocus="true"
+                :lat-lng="[station.lat, station.lon]"
+            >
+                <l-icon :icon-url="'/img/bus.png'" :icon-size="15" />
+
+            </l-marker>
 
             <l-polyline
                 v-for="(polyline, index) in polylines"
@@ -70,6 +73,8 @@ export default {
                 :lat-lngs="polyline"
                 :color="(index % 2 === 0) ? 'green' : (index%3 === 0) ? 'yellow' : 'red'"
             />
+
+
 
         </l-map>
 </template>
