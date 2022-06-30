@@ -1,8 +1,6 @@
-
 <script setup>
 import "leaflet/dist/leaflet.css"
-import { LMap, LTileLayer, LGeoJson, LPolyline, LMarker, LCircleMarker, LIcon } from "@vue-leaflet/vue-leaflet";
-
+import {LMap, LTileLayer, LPolyline, LMarker, LIcon, LPopup} from "@vue-leaflet/vue-leaflet";
 
 defineProps({
     canLogin: Boolean,
@@ -13,9 +11,6 @@ defineProps({
     stations: Object
 
 });
-
-
-
 </script>
 <script>
 export default {
@@ -29,54 +24,66 @@ export default {
         polylines() {
             const polylines = [];
             this.routeShapes.forEach((route) => {
-                const polyline = route.shapes.map((e) => [e.lat, e.lng])
+                const polyline = route.shapes.map((e) => [e.lat, e.lng]);
                 polylines.push(polyline);
             })
             return polylines
-        }
+        },
+    },
+    methods: {
+        getPolyLine(routeid) {
+            const polyline = this.routeShapes.find((route) => route.routeid == routeid).shapes.map((e) => [e.lat, e.lng]);
+            return polyline
+        },
+
+
     }
 };
 
 
 </script>
-
-
-
 <template>
-<Head>
-    <title>Home</title>
-</Head>
-<!--<div v-for="(polyline, index) in polylines">-->
-<!--    {{index}}-->
-<!--</div>-->
+    <Head>
+        <title>Home</title>
+    </Head>
 
-        <l-map ref="map" id="map" v-model:zoom="zoom" :center="[5.59, -0.27]">
+    <l-map id="map" ref="map" v-model:zoom="zoom" :center="[5.59, -0.27]">
 
-            <l-tile-layer
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                layer-type="base"
-                name="OpenStreetMap"
-                :max-zoom="15"
-                :min-zoom="12"
-            ></l-tile-layer>
-            <l-marker
-                v-for="station in stations"
-                keyboard="true" autoPanOnFocus="true"
-                :lat-lng="[station.lat, station.lon]"
-            >
-                <l-icon :icon-url="'/img/bus.png'" :icon-size="15" />
+        <l-tile-layer
+            :max-zoom="15"
+            :min-zoom="12"
+            layer-type="base"
+            name="OpenStreetMap"
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        ></l-tile-layer>
 
-            </l-marker>
+        <l-marker
+            v-for="station in stations"
+            :lat-lng="[station.lat, station.lon]" autoPanOnFocus="true"
+            keyboard="true"
+        >
+            <l-icon :icon-size="15" :icon-url="'/img/bus.png'"/>
+            <l-popup>
+                <p><strong>Station:</strong> {{ station.stationname }}</p>
+                <p><strong>Station Number:</strong> {{ station.stationid }}</p>
+                <p><strong><a
+                    :href="'https://www.google.com/maps/@?api=1&map_action=pano&viewpoint='+ station.lat +'%2C' + station.lon +'&heading=45&pitch=0&fov=80'">Google
+                    Street View</a></strong></p>
+            </l-popup>
+        </l-marker>
 
-            <l-polyline
-                v-for="(polyline, index) in polylines"
-                :key="index"
-                :lat-lngs="polyline"
-                :color="(index % 2 === 0) ? 'green' : (index%3 === 0) ? 'yellow' : 'red'"
-            />
+        <l-polyline
+            v-for="(routeShape, index) in routeShapes"
+            :key="index"
+            :color="(index % 2 === 0) ? 'green' : (index%3 === 0) ? 'yellow' : 'red'"
+            :lat-lngs="getPolyLine(routeShape.routeid)"
+        >
+            <l-popup>
+                <p><strong>Route:</strong> {{ routeShape.routename }}</p>
+            </l-popup>
+        </l-polyline>
 
 
-
-        </l-map>
+    </l-map>
 </template>
 

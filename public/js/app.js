@@ -23800,6 +23800,16 @@ var __default__ = {
       });
       return polylines;
     }
+  },
+  methods: {
+    getPolyLine: function getPolyLine(routeid) {
+      var polyline = this.routeShapes.find(function (route) {
+        return route.routeid == routeid;
+      }).shapes.map(function (e) {
+        return [e.lat, e.lng];
+      });
+      return polyline;
+    }
   }
 };
 
@@ -23820,11 +23830,10 @@ var __default__ = {
     var __returned__ = {
       LMap: _vue_leaflet_vue_leaflet__WEBPACK_IMPORTED_MODULE_1__.LMap,
       LTileLayer: _vue_leaflet_vue_leaflet__WEBPACK_IMPORTED_MODULE_1__.LTileLayer,
-      LGeoJson: _vue_leaflet_vue_leaflet__WEBPACK_IMPORTED_MODULE_1__.LGeoJson,
       LPolyline: _vue_leaflet_vue_leaflet__WEBPACK_IMPORTED_MODULE_1__.LPolyline,
       LMarker: _vue_leaflet_vue_leaflet__WEBPACK_IMPORTED_MODULE_1__.LMarker,
-      LCircleMarker: _vue_leaflet_vue_leaflet__WEBPACK_IMPORTED_MODULE_1__.LCircleMarker,
-      LIcon: _vue_leaflet_vue_leaflet__WEBPACK_IMPORTED_MODULE_1__.LIcon
+      LIcon: _vue_leaflet_vue_leaflet__WEBPACK_IMPORTED_MODULE_1__.LIcon,
+      LPopup: _vue_leaflet_vue_leaflet__WEBPACK_IMPORTED_MODULE_1__.LPopup
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -26025,6 +26034,20 @@ var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 /* HOISTED */
 );
 
+var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", null, "Station:", -1
+/* HOISTED */
+);
+
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", null, "Station Number:", -1
+/* HOISTED */
+);
+
+var _hoisted_4 = ["href"];
+
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", null, "Route:", -1
+/* HOISTED */
+);
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Head = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Head");
 
@@ -26035,9 +26058,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("<div v-for=\"(polyline, index) in polylines\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("    {{index}}"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("</div>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["LMap"], {
-    ref: "map",
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["LMap"], {
     id: "map",
+    ref: "map",
     zoom: $data.zoom,
     "onUpdate:zoom": _cache[0] || (_cache[0] = function ($event) {
       return $data.zoom = $event;
@@ -26046,24 +26069,41 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["LTileLayer"], {
-        url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+        "max-zoom": 15,
+        "min-zoom": 12,
         "layer-type": "base",
         name: "OpenStreetMap",
-        "max-zoom": 15,
-        "min-zoom": 12
+        url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       }), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.stations, function (station) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["LMarker"], {
-          keyboard: "true",
+          "lat-lng": [station.lat, station.lon],
           autoPanOnFocus: "true",
-          "lat-lng": [station.lat, station.lon]
+          keyboard: "true"
         }, {
           "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
             return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["LIcon"], {
-              "icon-url": '/img/bus.png',
-              "icon-size": 15
+              "icon-size": 15,
+              "icon-url": '/img/bus.png'
             }, null, 8
             /* PROPS */
-            , ["icon-url"])];
+            , ["icon-url"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["LPopup"], null, {
+              "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+                return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(station.stationname), 1
+                /* TEXT */
+                )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(station.stationid), 1
+                /* TEXT */
+                )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+                  href: 'https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=' + station.lat + '%2C' + station.lon + '&heading=45&pitch=0&fov=80'
+                }, "Google Street View", 8
+                /* PROPS */
+                , _hoisted_4)])])];
+              }),
+              _: 2
+              /* DYNAMIC */
+
+            }, 1024
+            /* DYNAMIC_SLOTS */
+            )];
           }),
           _: 2
           /* DYNAMIC */
@@ -26073,14 +26113,32 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         , ["lat-lng"]);
       }), 256
       /* UNKEYED_FRAGMENT */
-      )), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($options.polylines, function (polyline, index) {
+      )), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.routeShapes, function (routeShape, index) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["LPolyline"], {
           key: index,
-          "lat-lngs": polyline,
-          color: index % 2 === 0 ? 'green' : index % 3 === 0 ? 'yellow' : 'red'
-        }, null, 8
-        /* PROPS */
-        , ["lat-lngs", "color"]);
+          color: index % 2 === 0 ? 'green' : index % 3 === 0 ? 'yellow' : 'red',
+          "lat-lngs": $options.getPolyLine(routeShape.routeid)
+        }, {
+          "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+            return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["LPopup"], null, {
+              "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+                return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(routeShape.routename), 1
+                /* TEXT */
+                )])];
+              }),
+              _: 2
+              /* DYNAMIC */
+
+            }, 1024
+            /* DYNAMIC_SLOTS */
+            )];
+          }),
+          _: 2
+          /* DYNAMIC */
+
+        }, 1032
+        /* PROPS, DYNAMIC_SLOTS */
+        , ["color", "lat-lngs"]);
       }), 128
       /* KEYED_FRAGMENT */
       ))];
