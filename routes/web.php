@@ -22,16 +22,14 @@ Route::get('/', function () {
     $routes = RouteModel::whereHas('shapes')->get();
     $routeShapes = $routes->load('shapes');
     $stations = Station::all();
-     return Inertia::render('Home', [
+    return Inertia::render('Home', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-         'routeShapes' => $routeShapes,
-         'stations' => $stations
+        'routeShapes' => fn() => $routeShapes,
+        'stations' => fn() => $stations
     ]);
-});
-
+})->name('home');
+//named route
 
 
 Route::post('/admin/pages', 'App\Http\Controllers\PagesController@store')->middleware(['auth', 'verified']);
@@ -40,8 +38,6 @@ Route::get('/admin/pages/create', 'App\Http\Controllers\PagesController@create')
 
 Route::get('/admin/pages/', 'App\Http\Controllers\PagesController@index')->middleware(['auth', 'verified']);
 Route::get('/admin', 'App\Http\Controllers\AdminController@index')->middleware(['auth', 'verified']);
-
-
 
 
 Route::delete('/admin/pages/{page}/delete', 'App\Http\Controllers\PagesController@destroy')->middleware(['auth', 'verified']);

@@ -5,14 +5,12 @@ import {LMap, LTileLayer, LPolyline, LMarker, LIcon, LPopup} from "@vue-leaflet/
 defineProps({
     canLogin: Boolean,
     canRegister: Boolean,
-    laravelVersion: String,
-    phpVersion: String,
     routeShapes: Object,
     stations: Object
-
 });
 </script>
 <script>
+
 export default {
 
     data() {
@@ -20,25 +18,15 @@ export default {
             zoom: 13,
         };
     },
-    computed: {
-        polylines() {
-            const polylines = [];
-            this.routeShapes.forEach((route) => {
-                const polyline = route.shapes.map((e) => [e.lat, e.lng]);
-                polylines.push(polyline);
-            })
-            return polylines
-        },
-    },
+    computed: {},
     methods: {
         getPolyLine(routeid) {
             const polyline = this.routeShapes.find((route) => route.routeid == routeid).shapes.map((e) => [e.lat, e.lng]);
             return polyline
         },
+    },
 
-
-    }
-};
+}
 
 
 </script>
@@ -83,7 +71,7 @@ export default {
         <l-polyline
             v-for="(routeShape, index) in routeShapes"
             :key="index"
-            :color="(index % 2 === 0) ? 'green' : (index%3 === 0) ? 'yellow' : 'red'"
+            :color="'#' + Math.floor(Math.random() * 16777215).toString(16)"
             :lat-lngs="getPolyLine(routeShape.routeid)"
         >
             <l-popup>
