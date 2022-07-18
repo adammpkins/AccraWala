@@ -668,3 +668,7 @@ div.min-h-screen > div.bg-white
         display: none;
     }
 }
+
+.pe-0 {
+    padding-right: 0 !important;
+}

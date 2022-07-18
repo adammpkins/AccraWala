@@ -34,6 +34,9 @@ class StopsController extends Controller
             $stop->photo = $request->photo->store('public/stop_photos');
         }
         $stop->authorid = $request->authorid;
+        if ($stop->order == null) {
+            $stop->order = $itinerary->stops->count() + 1;
+        }
         $stop->save();
 
         return redirect('/itineraries/' . $itinerary->id);

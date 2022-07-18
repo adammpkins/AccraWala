@@ -1,58 +1,3 @@
-<script setup>
-import "leaflet/dist/leaflet.css"
-import {LMap, LTileLayer, LPolyline, LMarker, LIcon, LPopup} from "@vue-leaflet/vue-leaflet";
-import {reactive} from "vue";
-
-defineProps({
-    canLogin: Boolean,
-    canRegister: Boolean,
-    routeShapes: Object,
-    stations: Object,
-    itineraries: Object
-});
-
-let showItineraryControl = reactive({show: false, itinerary: null});
-let showItinerariesControl = reactive({show: false});
-
-function showItineraries() {
-    showItinerariesControl.show = !showItinerariesControl.show;
-}
-
-function showItinerary(itinerary) {
-    showItineraryControl.show = !showItineraryControl.show;
-    showItineraryControl.itinerary = itinerary;
-}
-
-function closeAll() {
-    showItinerariesControl.show = false;
-    showItineraryControl.show = false;
-}
-
-
-</script>
-<script>
-
-export default {
-
-    data() {
-        return {
-            zoom: 13,
-        };
-    },
-    computed: {},
-    methods: {
-        getPolyLine(routeid) {
-            const polyline = this.routeShapes.find((route) => route.routeid == routeid).shapes.map((e) => [e.lat, e.lng]);
-            return polyline
-        },
-
-    },
-
-
-}
-
-
-</script>
 <template>
     <Head>
         <title>Home</title>
@@ -62,7 +7,13 @@ export default {
     <!--        {{ routeShape.routeid }} {{ routeShape.routename }}-->
 
     <!--    </div>-->
-
+    <vue-final-modal v-model="showModal" classes="flex justify-center items-center "
+                     content-class="m-auto w-50 p-4 border rounded bg-white overflow-auto" name="stop_modal">
+        <span class="modal__title">{{ modalTitle }}</span>
+        <div class="modal__content">
+            <p>{{ modalBody }}</p>
+        </div>
+    </vue-final-modal>
     <l-map id="map" ref="map" v-model:zoom="zoom" :center="[5.59, -0.27]" :options="{preferCanvas: true}">
 
         <l-tile-layer
@@ -91,21 +42,38 @@ export default {
                 <ul>
 
                 <span v-for="itinerary in itineraries" v-show="showItinerariesControl.show == true">
+
                     <span
                         v-if="itinerary.stops.find((stop) => stop.station_id == station.id)">
                     <li><button @click="showItinerary(itinerary)">{{
                             itinerary.title
                         }}</button></li>
-
+                    <ul>
                         <div
-                            v-show="showItineraryControl.show == true && showItineraryControl.itinerary == itinerary"><strong>Current Stop:</strong></div>
-                        <ul>
-                        <li v-show="showItineraryControl.show == true && showItineraryControl.itinerary == itinerary">
-                            Title: {{ itinerary.stops.find((stop) => stop.station_id == station.id).title }}</li>
-                        <li v-show="showItineraryControl.show == true && showItineraryControl.itinerary == itinerary">Body: {{
-                                itinerary.stops.find((stop) => stop.station_id == station.id).body
-                            }}</li>
-                        </ul>
+                            v-if="itinerary.stops.find((stop) => stop.station_id == station.id) && showItineraryControl.itinerary == itinerary">
+
+                                <div v-for="stop in itinerary.stops">
+                                    <span v-if="stop.station_id == station.id">
+                                        <li><button
+                                            @click="openModalExample(itinerary,station,stop)">Open Stop: {{
+                                                stop.title
+                                            }}</button></li>
+                                        <li><button>Next Stop</button></li>
+                                    </span>
+                                </div>
+
+                        </div>
+                    </ul>
+
+                        <!--                        <div-->
+                        <!--                            v-show="showItineraryControl.show == true && showItineraryControl.itinerary == itinerary"><strong>Current Stop:</strong></div>-->
+                        <!--                        <ul>-->
+                        <!--                        <li v-show="showItineraryControl.show == true && showItineraryControl.itinerary == itinerary">-->
+                        <!--                            Title:  {{ itinerary.stops.find((stop) => stop.station_id == station.id).title }}</li>-->
+                        <!--                        <li v-show="showItineraryControl.show == true && showItineraryControl.itinerary == itinerary">Body: {{-->
+                        <!--                                itinerary.stops.find((stop) => stop.station_id == station.id).body-->
+                        <!--                            }}</li>-->
+                        <!--                        </ul>-->
 
 
                     </span>
@@ -135,7 +103,81 @@ export default {
 
 
     </l-map>
+
+
 </template>
+<script setup>
+import "leaflet/dist/leaflet.css"
+import {LMap, LTileLayer, LPolyline, LMarker, LIcon, LPopup} from "@vue-leaflet/vue-leaflet";
+import {reactive} from "vue";
+
+
+defineProps({
+    canLogin: Boolean,
+    canRegister: Boolean,
+    routeShapes: Object,
+    stations: Object,
+    itineraries: Object
+});
+
+let showItineraryControl = reactive({show: false, itinerary: null});
+let showItinerariesControl = reactive({show: false});
+
+
+function showItineraries() {
+    showItinerariesControl.show = !showItinerariesControl.show;
+}
+
+function showItinerary(itinerary) {
+    showItineraryControl.show = !showItineraryControl.show;
+    showItineraryControl.itinerary = itinerary;
+}
+
+function closeAll() {
+    showItinerariesControl.show = false;
+    showItineraryControl.show = false;
+}
+
+
+</script>
+
+<script>
+import {$vfm, VueFinalModal, ModalsContainer} from 'vue-final-modal';
+
+
+export default {
+    data() {
+        return {
+            zoom: 13,
+            showModal: false,
+            modalTitle: '',
+            modalBody: '',
+        };
+    },
+    computed: {},
+    methods: {
+        openModalExample(itinerary, station, stop) {
+
+            this.modalTitle = stop.title;
+            this.modalBody = stop.body;
+            this.$vfm.show('stop_modal')
+
+        },
+        getPolyLine(routeid) {
+            const polyline = this.routeShapes.find((route) => route.routeid == routeid).shapes.map((e) => [e.lat, e.lng]);
+            return polyline
+        },
+    },
+    components: {
+        VueFinalModal,
+        ModalsContainer
+    }
+
+
+};
+
+
+</script>
 <style scoped>
 button {
     color: #0078A8;
@@ -146,5 +188,6 @@ button {
     margin: 0;
     cursor: pointer;
 }
+
 </style>
 
