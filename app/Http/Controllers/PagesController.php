@@ -2,12 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Route;
+use App\Models\Itinerary;
 use App\Models\Page;
+use App\Models\Route as RouteModel;
+use App\Models\Station;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class PagesController extends Controller
 {
+    public function home()
+    {
+        $itineraries = Itinerary::with('stops', 'stops.station')->get();
+        $routes = RouteModel::whereHas('shapes')->get();
+        $routeShapes = $routes->load('shapes');
+        $stations = Station::all();
+        return Inertia::render('Home', [
+            'routeShapes' => fn() => $routeShapes,
+            'stations' => fn() => $stations,
+            'itineraries' => fn() => $itineraries,
+        ]);
+    }
+
     public function index(Request $request)
     {
 
@@ -17,6 +34,7 @@ class PagesController extends Controller
             'pages' => $pages,
         ]);
     }
+
     public function create(): \Inertia\Response
     {
         return Inertia::render('Create');
@@ -32,6 +50,7 @@ class PagesController extends Controller
         $page->save();
         return redirect('/admin/pages')->with('success', 'Page created successfully');
     }
+
     public function destroy(Page $page)
     {
         $page->delete();
@@ -45,6 +64,7 @@ class PagesController extends Controller
         ]);
 
     }
+
     public function edit(Page $page)
     {
         return Inertia::render('Edit', [
@@ -61,6 +81,7 @@ class PagesController extends Controller
         $page->save();
         return redirect('/admin/pages');
     }
+
     public function upload(Request $request)
     {
         $page = new Page();
@@ -68,7 +89,7 @@ class PagesController extends Controller
         $page->exists = true;
         $image = $page->addMediaFromRequest('upload')->toMediaCollection('images');
         return response()->json([
-           'url' => $image->getUrl('thumb'),
+            'url' => $image->getUrl('thumb'),
         ]);
     }
 }

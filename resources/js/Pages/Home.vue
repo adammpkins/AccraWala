@@ -6,7 +6,8 @@ defineProps({
     canLogin: Boolean,
     canRegister: Boolean,
     routeShapes: Object,
-    stations: Object
+    stations: Object,
+    itineraries: Object
 });
 </script>
 <script>
@@ -24,7 +25,9 @@ export default {
             const polyline = this.routeShapes.find((route) => route.routeid == routeid).shapes.map((e) => [e.lat, e.lng]);
             return polyline
         },
+
     },
+
 
 }
 
@@ -57,7 +60,7 @@ export default {
             :lat-lng="[station.lat, station.lon]" autoPanOnFocus="true"
             keyboard="true"
         >
-            <l-icon :icon-size="15" :icon-url="'/img/bus.png'"/>
+            <l-icon :icon-size="[15,15]" :icon-url="'/img/bus.png'"/>
             <l-popup>
                 <p><strong>Station:</strong> {{ station.stationname }}</p>
                 <p><strong>Station Number:</strong> {{ station.stationid }}</p>
@@ -75,6 +78,7 @@ export default {
             :lat-lngs="getPolyLine(routeShape.routeid)"
         >
             <l-popup>
+
                 <p><strong>Route:</strong> {{ routeShape.routename }}</p>
             </l-popup>
         </l-polyline>
