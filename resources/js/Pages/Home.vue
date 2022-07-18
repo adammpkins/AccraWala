@@ -1,6 +1,7 @@
 <script setup>
 import "leaflet/dist/leaflet.css"
 import {LMap, LTileLayer, LPolyline, LMarker, LIcon, LPopup} from "@vue-leaflet/vue-leaflet";
+import {reactive} from "vue";
 
 defineProps({
     canLogin: Boolean,
@@ -9,6 +10,25 @@ defineProps({
     stations: Object,
     itineraries: Object
 });
+
+let showItineraryControl = reactive({show: false, itinerary: null});
+let showItinerariesControl = reactive({show: false});
+
+function showItineraries() {
+    showItinerariesControl.show = !showItinerariesControl.show;
+}
+
+function showItinerary(itinerary) {
+    showItineraryControl.show = !showItineraryControl.show;
+    showItineraryControl.itinerary = itinerary;
+}
+
+function closeAll() {
+    showItinerariesControl.show = false;
+    showItineraryControl.show = false;
+}
+
+
 </script>
 <script>
 
@@ -43,7 +63,6 @@ export default {
 
     <!--    </div>-->
 
-
     <l-map id="map" ref="map" v-model:zoom="zoom" :center="[5.59, -0.27]" :options="{preferCanvas: true}">
 
         <l-tile-layer
@@ -59,9 +78,40 @@ export default {
             v-for="station in stations"
             :lat-lng="[station.lat, station.lon]" autoPanOnFocus="true"
             keyboard="true"
+            @click="closeAll()"
         >
             <l-icon :icon-size="[15,15]" :icon-url="'/img/bus.png'"/>
             <l-popup>
+                <!-- Only show showItineraries button if there are stops with a station_id equal to station.id -->
+                <button
+                    v-if="itineraries.find(itinerary => itinerary.stops.find(stop => stop.station_id == station.id))"
+                    @click="showItineraries()">Show Itineraries
+                </button>
+
+                <ul>
+
+                <span v-for="itinerary in itineraries" v-show="showItinerariesControl.show == true">
+                    <span
+                        v-if="itinerary.stops.find((stop) => stop.station_id == station.id)">
+                    <li><button @click="showItinerary(itinerary)">{{
+                            itinerary.title
+                        }}</button></li>
+
+                        <div
+                            v-show="showItineraryControl.show == true && showItineraryControl.itinerary == itinerary"><strong>Current Stop:</strong></div>
+                        <ul>
+                        <li v-show="showItineraryControl.show == true && showItineraryControl.itinerary == itinerary">
+                            Title: {{ itinerary.stops.find((stop) => stop.station_id == station.id).title }}</li>
+                        <li v-show="showItineraryControl.show == true && showItineraryControl.itinerary == itinerary">Body: {{
+                                itinerary.stops.find((stop) => stop.station_id == station.id).body
+                            }}</li>
+                        </ul>
+
+
+                    </span>
+                </span>
+                </ul>
+
                 <p><strong>Station:</strong> {{ station.stationname }}</p>
                 <p><strong>Station Number:</strong> {{ station.stationid }}</p>
                 <p><strong><a
@@ -86,4 +136,15 @@ export default {
 
     </l-map>
 </template>
+<style scoped>
+button {
+    color: #0078A8;
+    background-color: transparent;
+    border: none;
+    text-decoration: underline;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+}
+</style>
 
