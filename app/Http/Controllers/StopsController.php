@@ -31,7 +31,7 @@ class StopsController extends Controller
         $stop->itinerary_id = $request->itinerary_id;
         //upload the photo
         if ($request->hasFile('photo')) {
-            $stop->photo = $request->photo->store('public/stop_photos');
+            $stop->photo = $request->photo->store('stop_photos', 'public');
         }
         $stop->authorid = $request->authorid;
         if ($stop->order == null) {
@@ -39,6 +39,32 @@ class StopsController extends Controller
         }
         $stop->save();
 
+        return redirect('/itineraries/' . $itinerary->id);
+    }
+
+    public function edit($id)
+    {
+        $stop = Stop::find($id);
+        $stations = Station::all();
+        $itinerary = Itinerary::find($stop->itinerary_id);
+        return Inertia::render('Stops/Edit', [
+            'stop' => $stop,
+            'stations' => $stations,
+            'itinerary' => $itinerary,
+        ]);
+    }
+
+    public function show(Itinerary $itinerary, Stop $stop)
+    {
+        return Inertia::render('Stops/Show', [
+            'stop' => $stop,
+            'itinerary' => $itinerary,
+        ]);
+    }
+
+    public function destroy(Itinerary $itinerary, Stop $stop)
+    {
+        $stop->delete();
         return redirect('/itineraries/' . $itinerary->id);
     }
 }

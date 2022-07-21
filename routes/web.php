@@ -30,6 +30,10 @@ Route::delete('/itineraries/{itinerary}/delete', 'App\Http\Controllers\Itinerari
 
 Route::get('/itineraries/{itinerary}/stops/create', 'App\Http\Controllers\StopsController@create');
 Route::post('/itineraries/{itinerary}/stops', 'App\Http\Controllers\StopsController@store');
+Route::get('/itineraries/{itinerary}/stops/{stop}/edit', 'App\Http\Controllers\StopsController@edit');
+Route::patch('/itineraries/{itinerary}/stops/{stop}', 'App\Http\Controllers\StopsController@update');
+Route::delete('/itineraries/{itinerary}/stops/{stop}/delete', 'App\Http\Controllers\StopsController@destroy');
+Route::get('/itineraries/{itinerary}/stops/{stop}', 'App\Http\Controllers\StopsController@show');
 
 
 Route::post('/admin/pages', 'App\Http\Controllers\PagesController@store')->middleware(['auth', 'verified']);

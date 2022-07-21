@@ -34,6 +34,7 @@
         "@ckeditor/ckeditor5-build-classic": "^34.1.0",
         "@ckeditor/ckeditor5-vue": "^4.0.1",
         "@tinymce/tinymce-vue": "^4.0.7",
+        "leaflet": "^1.8.0",
         "vue-final-modal": "^3.4.4"
     }
 }

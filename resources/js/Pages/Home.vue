@@ -3,18 +3,16 @@
         <title>Home</title>
     </Head>
 
-    <!--    <div v-for="(routeShape, index) in routeShapes" :key="index">-->
-    <!--        {{ routeShape.routeid }} {{ routeShape.routename }}-->
-
-    <!--    </div>-->
     <vue-final-modal v-model="showModal" classes="flex justify-center items-center "
                      content-class="m-auto w-50 p-4 border rounded bg-white overflow-auto" name="stop_modal">
-        <span class="modal__title">{{ modalTitle }}</span>
+        <span class="modal__title">{{ modalTitle.title }}</span>
         <div class="modal__content">
-            <p>{{ modalBody }}</p>
+            <img :src="assetUrl(modalPhoto.photo)" alt="{{ modalTitle.title }}" class="w-full">
+            <p>{{ modalBody.body }}</p>
         </div>
     </vue-final-modal>
-    <l-map id="map" ref="map" v-model:zoom="zoom" :center="[5.59, -0.27]" :options="{preferCanvas: true}">
+    <l-map id="map" ref="map" v-model:zoom="zoom" :center="center.center" :options="{preferCanvas: true}"
+           @ready="showOnReady()">
 
         <l-tile-layer
             :max-zoom="15"
@@ -27,11 +25,14 @@
 
         <l-marker
             v-for="station in stations"
-            :lat-lng="[station.lat, station.lon]" autoPanOnFocus="true"
+            ref="stationRefs"
+            :lat-lng="[station.lat, station.lon]"
+            :options="{title: station.stationname}"
+            autoPanOnFocus="true"
             keyboard="true"
             @click="closeAll()"
         >
-            <l-icon :icon-size="[15,15]" :icon-url="'/img/bus.png'"/>
+            <l-icon :icon-size="[15,15]" :icon-url="hasItinerary(station)"/>
             <l-popup>
                 <!-- Only show showItineraries button if there are stops with a station_id equal to station.id -->
                 <button
@@ -41,43 +42,38 @@
 
                 <ul>
 
-                <span v-for="itinerary in itineraries" v-show="showItinerariesControl.show == true">
+                        <span v-for="itinerary in itineraries" v-show="showItinerariesControl.show == true">
 
-                    <span
-                        v-if="itinerary.stops.find((stop) => stop.station_id == station.id)">
-                    <li><button @click="showItinerary(itinerary)">{{
-                            itinerary.title
-                        }}</button></li>
-                    <ul>
-                        <div
-                            v-if="itinerary.stops.find((stop) => stop.station_id == station.id) && showItineraryControl.itinerary == itinerary">
+                            <span
+                                v-if="itinerary.stops.find((stop) => stop.station_id == station.id)">
+                            <li><button @click="showItinerary(itinerary)">{{
+                                    itinerary.title
+                                }}</button></li>
+                            <ul>
+                                <div
+                                    v-if="itinerary.stops.find((stop) => stop.station_id == station.id) && showItineraryControl.itinerary == itinerary">
 
-                                <div v-for="stop in itinerary.stops">
-                                    <span v-if="stop.station_id == station.id">
-                                        <li><button
-                                            @click="openModalExample(itinerary,station,stop)">Open Stop: {{
-                                                stop.title
-                                            }}</button></li>
-                                        <li><button>Next Stop</button></li>
-                                    </span>
+                                        <div v-for="stop in itinerary.stops">
+                                            <span v-if="stop.station_id == station.id">
+                                                <li><button
+                                                    @click="openModalExample(itinerary,station,stop)">Open Stop: {{
+                                                        stop.title
+                                                    }}</button></li>
+                                                <li>
+<!--                                                    Button using v-if to show/hide button if there is no next stop-->
+
+                                                    <button
+                                                        v-if="stop.order == itinerary.stops.length" disabled>End of Itinerary</button>
+                                                    <button v-else
+                                                            @click="nextStop(itinerary.stops,station,stations,stop,itinerary)">Next Stop</button></li>
+                                            </span>
+                                        </div>
+
                                 </div>
+                            </ul>
 
-                        </div>
-                    </ul>
-
-                        <!--                        <div-->
-                        <!--                            v-show="showItineraryControl.show == true && showItineraryControl.itinerary == itinerary"><strong>Current Stop:</strong></div>-->
-                        <!--                        <ul>-->
-                        <!--                        <li v-show="showItineraryControl.show == true && showItineraryControl.itinerary == itinerary">-->
-                        <!--                            Title:  {{ itinerary.stops.find((stop) => stop.station_id == station.id).title }}</li>-->
-                        <!--                        <li v-show="showItineraryControl.show == true && showItineraryControl.itinerary == itinerary">Body: {{-->
-                        <!--                                itinerary.stops.find((stop) => stop.station_id == station.id).body-->
-                        <!--                            }}</li>-->
-                        <!--                        </ul>-->
-
-
-                    </span>
-                </span>
+                            </span>
+                        </span>
                 </ul>
 
                 <p><strong>Station:</strong> {{ station.stationname }}</p>
@@ -109,10 +105,10 @@
 <script setup>
 import "leaflet/dist/leaflet.css"
 import {LMap, LTileLayer, LPolyline, LMarker, LIcon, LPopup} from "@vue-leaflet/vue-leaflet";
-import {reactive} from "vue";
+import {reactive, ref, onMounted} from "vue";
+import {$vfm, VueFinalModal, ModalsContainer} from "vue-final-modal";
 
-
-defineProps({
+let props = defineProps({
     canLogin: Boolean,
     canRegister: Boolean,
     routeShapes: Object,
@@ -120,9 +116,37 @@ defineProps({
     itineraries: Object
 });
 
+//make the icon for the marker red if it's station is in the itinerary onMounted
+
 let showItineraryControl = reactive({show: false, itinerary: null});
 let showItinerariesControl = reactive({show: false});
+let modalTitle = reactive({title: "Next Stop"});
+let modalBody = reactive({body: "Next Stop"});
+let modalPhoto = reactive({photo: ""});
+let center = reactive({center: [5.59, -0.27]});
+let map = ref(null);
+const stationRefs = ref([])
+let showModal = ref(false);
+let zoom = ref(13);
 
+function assetUrl(path) {
+    return process.env.MIX_BASE_URL + 'storage/' + path
+}
+
+function hasItinerary(station) {
+    let stops = props.itineraries.find(itinerary => itinerary.stops.find(stop => stop.station_id == station.id));
+    if (stops) {
+        return "/img/bus-red.png";
+    } else {
+        return "/img/bus.png";
+    }
+}
+
+function showOnReady() {
+    console.log(stationRefs);
+    console.log("map ready");
+
+}
 
 function showItineraries() {
     showItinerariesControl.show = !showItinerariesControl.show;
@@ -139,39 +163,55 @@ function closeAll() {
 }
 
 
+function nextStop(stops, station, stations, currentStop, itinerary) {
+    let nextStop = stops.find((stop) => stop.itinerary_id == itinerary.id && stop.order == currentStop.order + 1);
+    let nextStation = stations.find((station) => station.id == nextStop.station_id);
+    if (nextStop) {
+
+        let nextStopMarker = stationRefs.value.find((marker) => marker.options.title == nextStation.stationname);
+        nextStopMarker.leafletObject.openPopup();
+
+
+    } else {
+        swal.fire({
+            title: "No Next Stop",
+            text: "There are no more stops for this itinerary",
+            icon: "warning",
+            button: "OK"
+        });
+    }
+
+    function findAndOpenNextPopup(stops, station, stations, currentStop, itinerary) {
+        //find and open the leaflet popup for the next stop
+        let nextStop = stops.find((stop) => stop.itinerary_id == itinerary.id && stop.order == currentStop.order + 1);
+        let nextStation = stations.find((station) => station.id == nextStop.station_id);
+
+    }
+}
+
+function openModalExample(itinerary, station, stop) {
+    modalTitle.title = stop.title;
+    modalBody.body = stop.body;
+    modalPhoto.photo = stop.photo;
+    center.center = [station.lat, station.lon];
+    $vfm.show('stop_modal')
+}
+
 </script>
 
 <script>
-import {$vfm, VueFinalModal, ModalsContainer} from 'vue-final-modal';
 
 
 export default {
-    data() {
-        return {
-            zoom: 13,
-            showModal: false,
-            modalTitle: '',
-            modalBody: '',
-        };
-    },
-    computed: {},
+
     methods: {
-        openModalExample(itinerary, station, stop) {
 
-            this.modalTitle = stop.title;
-            this.modalBody = stop.body;
-            this.$vfm.show('stop_modal')
 
-        },
         getPolyLine(routeid) {
             const polyline = this.routeShapes.find((route) => route.routeid == routeid).shapes.map((e) => [e.lat, e.lng]);
             return polyline
         },
     },
-    components: {
-        VueFinalModal,
-        ModalsContainer
-    }
 
 
 };
@@ -187,6 +227,13 @@ button {
     padding: 0;
     margin: 0;
     cursor: pointer;
+}
+
+button:disabled,
+button[disabled] {
+    color: #666666;
+    cursor: default;
+    text-decoration: none;
 }
 
 </style>

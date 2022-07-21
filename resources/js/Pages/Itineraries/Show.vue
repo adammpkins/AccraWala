@@ -16,14 +16,46 @@
                 <Link :href="'/itineraries/' + itinerary.id + '/stops/create'" class="btn green-btn float-end">
                     <span class="bi bi-plus"></span>New stop
                 </Link>
-                <ul>
-                    <li v-for="stop in itinerary.stops">
-                        <Link :href="'/itinerary/' + itinerary.id +'/stops/' + stop.id + '/edit/'">{{
-                                stop.title
-                            }}
-                        </Link>
-                    </li>
-                </ul>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Narrative</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr v-for="stop in itinerary.stops">
+                            <th scope="row">
+                                <Link :href="'/itineraries/' + itinerary.id + '/stops/' + stop.id">
+                                    {{ stop.id }}
+                                </Link>
+                            </th>
+                            <td>
+                                <Link :href="'/itineraries/' + itinerary.id + '/stops/' + stop.id">
+                                    {{ stop.title }}
+                                </Link>
+                            </td>
+                            <td>
+                                <Link :href="'/itineraries/' + itinerary.id + '/stops/' + stop.id">
+
+                                    {{ stop.gen_narrative }}
+                                </Link>
+                            </td>
+                            <td>
+                                <Link :href="'/itineraries/' + itinerary.id + '/stops/' + stop.id + '/edit/'"
+                                      class="btn btn-primary">Edit
+                                </Link>
+                                <button class="btn btn-danger" @click="destroy(stop.id)">Delete
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
             <!--        <div class="row">-->
             <!--            <div class="col-md-12">-->
@@ -38,10 +70,13 @@
             <!--            </div>-->
         </div>
     </div>
+
 </template>
 
 <script setup>
 import {usePage} from '@inertiajs/inertia-vue3'
+import {Inertia} from '@inertiajs/inertia'
+import Button from "../../../../vendor/laravel/breeze/stubs/inertia-vue/resources/js/Components/Button";
 
 let props = defineProps({
     itinerary: {
@@ -53,6 +88,12 @@ let props = defineProps({
         required: true
     }
 })
+
+function destroy(id) {
+    Inertia.delete('/itineraries/' + props.itinerary.id + '/stops/' + id + '/delete')
+}
+
+
 </script>
 
 <style scoped>
