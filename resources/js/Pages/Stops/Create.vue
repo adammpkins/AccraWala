@@ -32,6 +32,7 @@
                     </option>
                 </select>
             </div>
+        </div>
 
         <div class="row w-75 m-auto">
             <div class="col-md-6">
