@@ -23840,7 +23840,7 @@ var __default__ = {
     var zoom = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)(13);
 
     function assetUrl(path) {
-      return "http://localhost/" + path;
+      return "http://localhost/" + 'storage/' + path;
     }
 
     function hasItinerary(station) {
