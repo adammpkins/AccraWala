@@ -129,7 +129,7 @@ let showModal = ref(false);
 let zoom = ref(13);
 
 function assetUrl(path) {
-    return process.env.MIX_BASE_URL + 'storage/' + path
+    return process.env.MIX_BASE_URL + path
 }
 
 function hasItinerary(station) {
