@@ -46,7 +46,6 @@
 <script setup>
 import {useForm} from "@inertiajs/inertia-vue3";
 
-
 function assetUrl(path) {
     return process.env.MIX_BASE_URL + 'storage/' + path
 }
