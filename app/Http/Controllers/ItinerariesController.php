@@ -72,7 +72,7 @@ class ItinerariesController extends Controller
         if ($request->hasFile('f_photo')) {
             $itinerary->f_photo = $request->f_photo->store('public/itinerary_photos');
         }
-        $itinerary->authorid = $request->authorid;
+        $itinerary->authorid = auth()->user()->name;
         $itinerary->save();
 
         return redirect('/itineraries');

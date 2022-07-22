@@ -73,7 +73,7 @@ class StopsController extends Controller
         if ($request->hasFile('photo')) {
             $stop->photo = $request->photo->store('stop_photos', 'public');
         }
-        $stop->authorid = $request->authorid;
+        $stop->authorid = auth()->user()->name;
         if ($stop->order == null) {
             $stop->order = $itinerary->stops->count() + 1;
         }

@@ -32,14 +32,7 @@
                     </option>
                 </select>
             </div>
-        </div>
-        <div class="row w-75 m-auto">
-            <div class="col-md-6">
-                <label for="authorid">Author</label>
-                <input v-model="form.authorid" class="form-control" name="authorid" placeholder="Author Name"
-                       type="text">
-            </div>
-        </div>
+
         <div class="row w-75 m-auto">
             <div class="col-md-6">
                 <button class="btn btn-primary" type="submit">
@@ -68,7 +61,6 @@ let form = useForm({
     title: '',
     body: '',
     photo: null,
-    authorid: '',
     station_id: '',
     itinerary_id: props.itinerary.id
 
