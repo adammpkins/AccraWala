@@ -32,7 +32,7 @@ components: {
                         <i class="fs-4 bi-archive"></i> <span class="ms-1 d-none d-sm-inline">ARCHIVE</span></Link>
                 </li>
                 <li>
-                    <Link class="nav-link green px-0 align-middle " data-bs-toggle="collapse" href="/itineraries">
+                    <Link class="nav-link green px-0 align-middle" href="/itineraries">
                         <i class="fs-4 bi-bezier2"></i> <span class="ms-1 d-none d-sm-inline">ITINERARIES</span></Link>
 
                 </li>
