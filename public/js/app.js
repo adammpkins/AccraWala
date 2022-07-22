@@ -23858,8 +23858,7 @@ var __default__ = {
     }
 
     function showOnReady() {
-      console.log(stationRefs);
-      console.log("map ready");
+      console.log("http://localhost/");
     }
 
     function showItineraries() {

@@ -2,7 +2,6 @@
     <Head>
         <title>Home</title>
     </Head>
-    {{ process.env.MIX_BASE_URL }}
     <vue-final-modal v-model="showModal" classes="flex justify-center items-center "
                      content-class="m-auto w-50 p-4 border rounded bg-white overflow-auto" name="stop_modal">
         <span class="modal__title">{{ modalTitle.title }}</span>
@@ -142,8 +141,7 @@ function hasItinerary(station) {
 }
 
 function showOnReady() {
-    console.log(stationRefs);
-    console.log("map ready");
+    console.log(process.env.MIX_BASE_URL);
 
 }
 
