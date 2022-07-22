@@ -33,7 +33,7 @@ components: {
                 </li>
                 <li>
                     <Link class="nav-link green px-0 align-middle " data-bs-toggle="collapse" href="#submenu2">
-                        <i class="fs-4 bi-bezier2"></i> <span class="ms-1 d-none d-sm-inline">ITINERARY</span></Link>
+                        <i class="fs-4 bi-bezier2"></i> <span class="ms-1 d-none d-sm-inline">ITINERARIES</span></Link>
 
                 </li>
                 <li>
@@ -52,12 +52,13 @@ components: {
                 <Link id="dropdownUser1" aria-expanded="false"
                       class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                       data-bs-toggle="dropdown" href="#">
-                    <img alt="hugenerd" class="rounded-circle" height="30" src="https://github.com/mdo.png" width="30">
-                    <span class="d-none d-sm-inline mx-1">AdamMPkins</span>
+                    <i class="fs-4 bi-person"></i>
+                    <span class="d-none d-sm-inline mx-1">{{ $page.props.auth.user.name }}</span>
                 </Link>
                 <ul aria-labelledby="dropdownUser1" class="dropdown-menu dropdown-menu-dark text-small shadow">
                     <li>
-                        <Link v-if="$page.props.auth.user" class="dropdown-item" href="/admin">Admin</Link>
+                        <Link v-if="$page.props.auth.user.role == 'admin'" class="dropdown-item" href="/admin">Admin
+                        </Link>
                     </li>
                     <li>
                         <hr class="dropdown-divider">
