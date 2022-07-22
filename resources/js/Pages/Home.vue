@@ -7,13 +7,13 @@
                      content-class="m-auto w-50 p-4 border rounded bg-white overflow-auto" name="stop_modal">
         <span class="modal__title">{{ modalTitle.title }}</span>
         <div class="modal__content">
-            <img :src="assetUrl(modalPhoto.photo)" alt="{{ modalTitle.title }}" class="w-full">
+            <img :alt="modalTitle.title" :src="assetUrl(modalPhoto.photo)" class="w-full">
             <p>{{ modalBody.body }}</p>
         </div>
     </vue-final-modal>
+
     <l-map id="map" ref="map" v-model:zoom="zoom" :center="center.center" :options="{preferCanvas: true}"
            @ready="showOnReady()">
-
         <l-tile-layer
             :max-zoom="15"
             :min-zoom="12"
@@ -22,7 +22,6 @@
             updateWhenIdle="true"
             url="https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYWRhbW1wa2lucyIsImEiOiJjbDF3eG5pbzMwNTJ6M2ttcmR2cjN1djIyIn0.mipqBBImzfGcA29e1I4Sew"
         ></l-tile-layer>
-
         <l-marker
             v-for="station in stations"
             ref="stationRefs"
@@ -34,44 +33,46 @@
         >
             <l-icon :icon-size="[15,15]" :icon-url="hasItinerary(station)"/>
             <l-popup>
-                <!-- Only show showItineraries button if there are stops with a station_id equal to station.id -->
+
                 <button
                     v-if="itineraries.find(itinerary => itinerary.stops.find(stop => stop.station_id == station.id))"
                     @click="showItineraries()">Show Itineraries
                 </button>
 
                 <ul>
-
                         <span v-for="itinerary in itineraries" v-show="showItinerariesControl.show == true">
-
                             <span
                                 v-if="itinerary.stops.find((stop) => stop.station_id == station.id)">
-                            <li><button @click="showItinerary(itinerary)">{{
-                                    itinerary.title
-                                }}</button></li>
-                            <ul>
-                                <div
-                                    v-if="itinerary.stops.find((stop) => stop.station_id == station.id) && showItineraryControl.itinerary == itinerary">
+                                <li><button @click="showItinerary(itinerary)">{{
+                                        itinerary.title
+                                    }}</button>
+                                </li>
+                                <ul>
+                                    <div
+                                        v-if="itinerary.stops.find((stop) => stop.station_id == station.id) && showItineraryControl.itinerary == itinerary">
+                                            <div v-for="stop in itinerary.stops">
+                                                <span v-if="stop.station_id == station.id">
+                                                    <li>
+                                                        <button v-if="stop.order == 1"
+                                                                disabled>Start of Itinerary</button>
+                                                        <button v-else
+                                                                @click="prevStop(itinerary.stops,station,stations,stop,itinerary)">Previous Stop</button>
+                                                    </li>
+                                                    <li><button
+                                                        @click="openModalExample(itinerary,station,stop)">Open Stop: {{
+                                                            stop.title
+                                                        }}</button></li>
+                                                    <li>
+    <!--                                                    Button using v-if to show/hide button if there is no next stop-->
 
-                                        <div v-for="stop in itinerary.stops">
-                                            <span v-if="stop.station_id == station.id">
-                                                <li><button
-                                                    @click="openModalExample(itinerary,station,stop)">Open Stop: {{
-                                                        stop.title
-                                                    }}</button></li>
-                                                <li>
-<!--                                                    Button using v-if to show/hide button if there is no next stop-->
-
-                                                    <button
-                                                        v-if="stop.order == itinerary.stops.length" disabled>End of Itinerary</button>
-                                                    <button v-else
-                                                            @click="nextStop(itinerary.stops,station,stations,stop,itinerary)">Next Stop</button></li>
-                                            </span>
-                                        </div>
-
-                                </div>
-                            </ul>
-
+                                                        <button
+                                                            v-if="stop.order == itinerary.stops.length" disabled>End of Itinerary</button>
+                                                        <button v-else
+                                                                @click="nextStop(itinerary.stops,station,stations,stop,itinerary)">Next Stop</button></li>
+                                                </span>
+                                            </div>
+                                    </div>
+                                </ul>
                             </span>
                         </span>
                 </ul>
@@ -82,6 +83,7 @@
                     :href="'https://www.google.com/maps/@?api=1&map_action=pano&viewpoint='+ station.lat +'%2C' + station.lon +'&heading=45&pitch=0&fov=80'"
                     target="_blank">Google
                     Street View</a></strong></p>
+
             </l-popup>
         </l-marker>
 
@@ -91,16 +93,13 @@
             :color="'#' + Math.floor(Math.random() * 16777215).toString(16)"
             :lat-lngs="getPolyLine(routeShape.routeid)"
         >
-            <l-popup>
 
+            <l-popup>
                 <p><strong>Route:</strong> {{ routeShape.routename }}</p>
             </l-popup>
+
         </l-polyline>
-
-
     </l-map>
-
-
 </template>
 <script setup>
 import "leaflet/dist/leaflet.css"
@@ -180,12 +179,22 @@ function nextStop(stops, station, stations, currentStop, itinerary) {
             button: "OK"
         });
     }
+}
 
-    function findAndOpenNextPopup(stops, station, stations, currentStop, itinerary) {
-        //find and open the leaflet popup for the next stop
-        let nextStop = stops.find((stop) => stop.itinerary_id == itinerary.id && stop.order == currentStop.order + 1);
-        let nextStation = stations.find((station) => station.id == nextStop.station_id);
+function prevStop(stops, station, stations, currentStop, itinerary) {
+    let prevStop = stops.find((stop) => stop.itinerary_id == itinerary.id && stop.order == currentStop.order - 1);
+    if (prevStop) {
+        let prevStation = stations.find((station) => station.id == prevStop.station_id);
 
+        let prevStopMarker = stationRefs.value.find((marker) => marker.options.title == prevStation.stationname);
+        prevStopMarker.leafletObject.openPopup();
+    } else {
+        swal.fire({
+            title: "No Previous Stop",
+            text: "There are no previous stops for this itinerary",
+            icon: "warning",
+            button: "OK"
+        });
     }
 }
 
@@ -205,8 +214,6 @@ function openModalExample(itinerary, station, stop) {
 export default {
 
     methods: {
-
-
         getPolyLine(routeid) {
             const polyline = this.routeShapes.find((route) => route.routeid == routeid).shapes.map((e) => [e.lat, e.lng]);
             return polyline

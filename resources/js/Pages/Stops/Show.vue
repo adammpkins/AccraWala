@@ -20,6 +20,10 @@ let props = defineProps({
     itinerary: {
         type: Object,
         required: true
+    },
+    user: {
+        type: Object,
+        required: true
     }
 });
 

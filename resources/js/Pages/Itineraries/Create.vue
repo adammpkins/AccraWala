@@ -23,13 +23,6 @@
         </div>
         <div class="row w-75 m-auto">
             <div class="col-md-6">
-                <label for="authorid">Author Name</label>
-                <input v-model="form.authorid" class="form-control" name="authorid" placeholder="Author Name"
-                       type="text">
-            </div>
-        </div>
-        <div class="row w-75 m-auto">
-            <div class="col-md-6">
                 <button class="btn btn-primary" type="submit">Create Itinerary</button>
             </div>
         </div>
@@ -47,7 +40,6 @@ let form = useForm({
     title: '',
     gen_narrative: '',
     f_photo: null,
-    authorid: '',
     stops: []
 });
 

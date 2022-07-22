@@ -17,8 +17,11 @@ class ItinerariesController extends Controller
     public function index()
     {
         $itineraries = Itinerary::all();
+        $user = auth()->user();
         return Inertia::render('Itineraries/Index', [
             'itineraries' => $itineraries,
+            'loggedIn' => auth()->check(),
+            'user' => $user,
         ]);
     }
 
@@ -44,8 +47,11 @@ class ItinerariesController extends Controller
     public function show($id)
     {
         $itinerary = Itinerary::find($id)->load('stops');
+        $user = auth()->user();
         return Inertia::render('Itineraries/Show', [
             'itinerary' => $itinerary,
+            'loggedIn' => auth()->check(),
+            'user' => $user,
         ]);
     }
 
@@ -87,7 +93,8 @@ class ItinerariesController extends Controller
         if ($request->hasFile('f_photo')) {
             $itinerary->f_photo = $request->f_photo->store('itinerary_photos', 'public');
         }
-        $itinerary->authorid = $request->authorid;
+        //set authorid to the currently logged in user
+        $itinerary->authorid = auth()->user()->name;
         $itinerary->save();
 
         return redirect('/itineraries');

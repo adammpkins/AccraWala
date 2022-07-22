@@ -21,18 +21,18 @@ require __DIR__ . '/auth.php';
 
 Route::get('/', 'App\Http\Controllers\PagesController@home')->name('home');
 Route::get('/itineraries', 'App\Http\Controllers\ItinerariesController@index');
-Route::get('/itineraries/create', 'App\Http\Controllers\ItinerariesController@create');
-Route::post('/itineraries', 'App\Http\Controllers\ItinerariesController@store');
+Route::get('/itineraries/create', 'App\Http\Controllers\ItinerariesController@create')->middleware(['auth', 'verified']);;
+Route::post('/itineraries', 'App\Http\Controllers\ItinerariesController@store')->middleware(['auth', 'verified']);;
 Route::get('/itineraries/{itinerary}', 'App\Http\Controllers\ItinerariesController@show');
-Route::get('/itineraries/{itinerary}/edit', 'App\Http\Controllers\ItinerariesController@edit');
-Route::patch('/itineraries/{itinerary}', 'App\Http\Controllers\ItinerariesController@update');
-Route::delete('/itineraries/{itinerary}/delete', 'App\Http\Controllers\ItinerariesController@destroy');
+Route::get('/itineraries/{itinerary}/edit', 'App\Http\Controllers\ItinerariesController@edit')->middleware(['auth', 'verified']);;
+Route::patch('/itineraries/{itinerary}', 'App\Http\Controllers\ItinerariesController@update')->middleware(['auth', 'verified']);;
+Route::delete('/itineraries/{itinerary}/delete', 'App\Http\Controllers\ItinerariesController@destroy')->middleware(['auth', 'verified']);;
 
 Route::get('/itineraries/{itinerary}/stops/create', 'App\Http\Controllers\StopsController@create');
-Route::post('/itineraries/{itinerary}/stops', 'App\Http\Controllers\StopsController@store');
-Route::get('/itineraries/{itinerary}/stops/{stop}/edit', 'App\Http\Controllers\StopsController@edit');
-Route::patch('/itineraries/{itinerary}/stops/{stop}', 'App\Http\Controllers\StopsController@update');
-Route::delete('/itineraries/{itinerary}/stops/{stop}/delete', 'App\Http\Controllers\StopsController@destroy');
+Route::post('/itineraries/{itinerary}/stops', 'App\Http\Controllers\StopsController@store')->middleware(['auth', 'verified']);;
+Route::get('/itineraries/{itinerary}/stops/{stop}/edit', 'App\Http\Controllers\StopsController@edit')->middleware(['auth', 'verified']);;
+Route::patch('/itineraries/{itinerary}/stops/{stop}', 'App\Http\Controllers\StopsController@update')->middleware(['auth', 'verified']);;
+Route::delete('/itineraries/{itinerary}/stops/{stop}/delete', 'App\Http\Controllers\StopsController@destroy')->middleware(['auth', 'verified']);;
 Route::get('/itineraries/{itinerary}/stops/{stop}', 'App\Http\Controllers\StopsController@show');
 
 
@@ -42,8 +42,7 @@ Route::get('/admin/pages/', 'App\Http\Controllers\PagesController@index')->middl
 Route::get('/admin', 'App\Http\Controllers\AdminController@index')->middleware(['auth', 'verified']);
 Route::delete('/admin/pages/{page}/delete', 'App\Http\Controllers\PagesController@destroy')->middleware(['auth', 'verified']);
 Route::get('/admin/pages/{page}/edit', 'App\Http\Controllers\PagesController@edit')->middleware(['auth', 'verified']);
-Route::put('/admin/pages/{page}', 'App\Http\Controllers\PagesController@update');
-Route::post('/ckeditor/upload', 'App\Http\Controllers\PagesController@upload')->name('ckeditor.upload');
+Route::post('/ckeditor/upload', 'App\Http\Controllers\PagesController@upload')->name('ckeditor.upload')->middleware(['auth', 'verified']);
 
 
 Route::get('/{page:slug}', 'App\Http\Controllers\PagesController@show');

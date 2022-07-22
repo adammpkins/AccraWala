@@ -5,7 +5,9 @@
                 <div class="card">
                     <div class="card-header flex">
                         <h4 class="card-title float-start">Itineraries</h4>
-                        <Link class="btn btn-primary float-end" href="/itineraries/create">New Itinerary</Link>
+                        <Link v-if="loggedIn" class="btn btn-primary float-end" href="/itineraries/create">New
+                            Itinerary
+                        </Link>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -17,7 +19,7 @@
                                 <th>
                                     Narrative
                                 </th>
-                                <th>
+                                <th v-if="loggedIn && user.role === 'admin'">
                                     Actions
                                 </th>
                                 </thead>
@@ -34,10 +36,12 @@
                                         </Link>
                                     </td>
                                     <td>
-                                        <Link :href="'/itineraries/' + itinerary.id + '/edit/'"
+                                        <Link v-if="loggedIn && user.role === 'admin'"
+                                              :href="'/itineraries/' + itinerary.id + '/edit/'"
                                               class="btn btn-primary">Edit
                                         </Link>
-                                        <button class="btn btn-danger" @click="destroy(itinerary.id)">Delete
+                                        <button v-if="loggedIn && user.role === 'admin'" class="btn btn-danger"
+                                                @click="destroy(itinerary.id)">Delete
                                         </button>
                                     </td>
                                 </tr>
@@ -73,6 +77,12 @@ export default {
 </script>
 <script setup>
 import {Inertia} from "@inertiajs/inertia";
+
+let props = defineProps([
+    'itineraries',
+    'loggedIn',
+    'user'
+])
 
 let destroy = (id) => {
     Inertia.delete('/itineraries/' + id + '/delete')
