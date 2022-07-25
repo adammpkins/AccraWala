@@ -3,7 +3,7 @@
         <!--Index of StationMedia-->
         <div class="container mt-2">
             <h1 class="float-start">Media</h1>
-            <Link class="btn green-btn float-end" href="/media/create">
+            <Link v-if="loggedIn" class="btn green-btn float-end" href="/media/create">
                 <span class="bi bi-plus"></span>New Media
             </Link>
             <table class="table">
@@ -13,7 +13,7 @@
                     <th scope="col">Title</th>
                     <th scope="col">Description</th>
                     <th scope="col">Station</th>
-                    <th scope="col">Actions</th>
+                    <th v-if="loggedIn && $page.props.auth.user.role == 'admin'" scope="col">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -33,11 +33,13 @@
                         <Link :href="'/media/' + stationmedia.id">{{ stationmedia.station.stationname }}</Link>
                     </td>
                     <td>
-                        <Link :href="'/media/' + stationmedia.id + '/edit/'" class="btn green-btn mx-2">
+                        <Link v-if="loggedIn && $page.props.auth.user.role == 'admin'"
+                              :href="'/media/' + stationmedia.id + '/edit/'" class="btn green-btn mx-2">
                             <span class="bi bi-pencil"></span> Edit
                         </Link>
-                        <button class="btn red-btn" @click="update(stationmedia.id)"><span class="bi bi-trash"></span>
-                            Update
+                        <button v-if="loggedIn && $page.props.auth.user.role == 'admin'" class="btn red-btn"
+                                @click="update(stationmedia.id)"><span class="bi bi-trash"></span>
+                            Delete
                         </button>
                     </td>
                 </tr>
@@ -59,7 +61,11 @@ let props = defineProps({
     stationmedia: {
         type: Object,
         required: true
-    }
+    },
+    loggedIn: {
+        type: Boolean,
+        required: true
+    },
 });
 
 let form = useForm({

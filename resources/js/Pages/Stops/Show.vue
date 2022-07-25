@@ -4,7 +4,7 @@
             <div class="col-md-12">
                 <h1>{{ props.stop.title }}</h1>
                 <p>{{ props.stop.gen_narrative }}</p>
-                <img :alt="props.stop.title" :src="assetUrl(props.stop.photo)">
+                <img :alt="props.stop.title" :src="assetUrl(props.stop.photo)" style="max-width:300px">
             </div>
         </div>
     </div>

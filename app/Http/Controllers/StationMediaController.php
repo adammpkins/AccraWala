@@ -19,6 +19,7 @@ class StationMediaController extends Controller
         $stationmedia = StationMedia::all()->load('station');
         return Inertia::render('StationMedia/Index', [
             'stationmedia' => $stationmedia,
+            'loggedIn' => auth()->check(),
         ]);
     }
 

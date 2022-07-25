@@ -44,7 +44,7 @@
 </template>
 
 <script setup>
-import {useForm, defineProps} from "@inertiajs/inertia-vue3";
+import {useForm} from "@inertiajs/inertia-vue3";
 
 let props = defineProps({
     stations: {

@@ -4,11 +4,18 @@
             <title>Home</title>
         </Head>
         <vue-final-modal v-model="showModal" classes="flex justify-center items-center "
-                         content-class="m-auto w-50 p-4 border rounded bg-white overflow-auto" name="stop_modal">
-            <span class="modal__title">{{ modalTitle.title }}</span>
-            <div class="modal__content">
-                <img :alt="modalTitle.title" :src="assetUrl(modalPhoto.photo)" class="w-full">
-                <p>{{ modalBody.body }}</p>
+                         content-class="m-auto w-50  p-4 border rounded bg-white overflow-auto"
+                         name="stop_modal">
+            <span class="modal__title d-flex justify-content-center" v-html="modalTitle.title"></span>
+            <div class="modal__content d-flex justify-content-center">
+                <div class="row">
+                    <img :alt="modalTitle.title" :src="assetUrl(modalPhoto.photo)"/>
+                </div>
+            </div>
+            <div class="modal__content d-flex justify-content-center">
+                <div class="row">
+                    <p>{{ modalBody.body }}</p>
+                </div>
             </div>
         </vue-final-modal>
 
@@ -156,8 +163,8 @@ function showMedias(station) {
 }
 
 function showMedia(station, media) {
-    modalTitle.title = media.title;
-    modalBody.body = media.body;
+    modalTitle.title = '<h2>' + media.title + '</h2>';
+    modalBody.body = media.description;
     modalPhoto.photo = media.file;
     showModal.value = true;
 }

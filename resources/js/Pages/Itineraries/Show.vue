@@ -2,15 +2,15 @@
 
 
     <!-- Itinerary Show -->
-    <div class="container">
-        <div class="row">
+    <div class="container mt-5">
+        <div class="row mt-5">
             <div class="col-md-12">
-                <h1>{{ itinerary.title }}</h1>
-                <p>{{ itinerary.gen_narrative }}</p>
-                <img :src="baseUrl(itinerary.f_photo)" alt="">
+                <h1 class="mt-5">{{ itinerary.title }}</h1>
+                <p class="mt-5">{{ itinerary.gen_narrative }}</p>
+                <img :src="baseUrl(itinerary.f_photo)" alt="" class="mt-5" style="max-width:300px">
             </div>
         </div>
-        <div class="row">
+        <div class="row mt-5">
             <div class="col-md-12">
 
 
@@ -50,16 +50,16 @@
                                     </td>
                                     <td>
                                         <Link :href="'/itineraries/' + itinerary.id + '/stops/' + stop.id">
-                                            
+
                                             {{ stop.gen_narrative }}
                                         </Link>
                                     </td>
                                     <td>
                                         <Link v-if="loggedIn && user.role === 'admin'"
                                               :href="'/itineraries/' + itinerary.id + '/stops/' + stop.id + '/edit/'"
-                                              class="btn btn-primary">Edit
+                                              class="btn btn-primary it-btn">Edit
                                         </Link>
-                                        <button v-if="loggedIn && user.role === 'admin'" class="btn btn-danger"
+                                        <button v-if="loggedIn && user.role === 'admin'" class="btn btn-danger it-btn"
                                                 @click="destroy(stop.id)">Delete
                                         </button>
                                     </td>

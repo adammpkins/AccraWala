@@ -100,4 +100,12 @@ class ItinerariesController extends Controller
         return redirect('/itineraries');
     }
 
+    public function approve($id)
+    {
+        $itinerary = Itinerary::find($id);
+        $itinerary->approved = true;
+        $itinerary->save();
+        return redirect('/itineraries');
+    }
+
 }

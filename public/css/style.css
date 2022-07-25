@@ -672,3 +672,23 @@ div.min-h-screen > div.bg-white
 .pe-0 {
     padding-right: 0 !important;
 }
+
+.modal__content img{
+    max-width:200px;
+}
+
+.modal__content{
+    margin-top:20px;
+}
+.modal__title{
+    margin-top:20px;
+}
+
+.vfm__content{
+    margin-top:200px !important;
+}
+
+.it-btn{
+    font-size: 10px;
+    margin-right: 5px;
+}
