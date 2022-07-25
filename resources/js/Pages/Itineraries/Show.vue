@@ -50,7 +50,7 @@
                                     </td>
                                     <td>
                                         <Link :href="'/itineraries/' + itinerary.id + '/stops/' + stop.id">
-
+                                            
                                             {{ stop.gen_narrative }}
                                         </Link>
                                     </td>
@@ -90,6 +90,7 @@
 <script setup>
 import {usePage} from '@inertiajs/inertia-vue3'
 import {Inertia} from '@inertiajs/inertia'
+import {provide} from "vue"
 import Button from "../../../../vendor/laravel/breeze/stubs/inertia-vue/resources/js/Components/Button";
 
 let props = defineProps({

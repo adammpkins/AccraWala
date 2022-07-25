@@ -28,6 +28,14 @@ Route::get('/itineraries/{itinerary}/edit', 'App\Http\Controllers\ItinerariesCon
 Route::patch('/itineraries/{itinerary}', 'App\Http\Controllers\ItinerariesController@update')->middleware(['auth', 'verified']);;
 Route::delete('/itineraries/{itinerary}/delete', 'App\Http\Controllers\ItinerariesController@destroy')->middleware(['auth', 'verified']);;
 
+Route::get('/media', 'App\Http\Controllers\StationMediaController@index');
+Route::get('/media/create', 'App\Http\Controllers\StationMediaController@create')->middleware(['auth', 'verified']);;
+Route::post('/media', 'App\Http\Controllers\StationMediaController@store')->middleware(['auth', 'verified']);;
+Route::get('/media/{media}', 'App\Http\Controllers\StationMediaController@show');
+Route::get('/media/{media}/edit', 'App\Http\Controllers\StationMediaController@edit')->middleware(['auth', 'verified']);;
+Route::patch('/media/{media}', 'App\Http\Controllers\StationMediaController@update')->middleware(['auth', 'verified']);;
+Route::delete('/media/{media}/delete', 'App\Http\Controllers\StationMediaController@destroy')->middleware(['auth', 'verified']);;
+
 Route::get('/itineraries/{itinerary}/stops/create', 'App\Http\Controllers\StopsController@create');
 Route::post('/itineraries/{itinerary}/stops', 'App\Http\Controllers\StopsController@store')->middleware(['auth', 'verified']);;
 Route::get('/itineraries/{itinerary}/stops/{stop}/edit', 'App\Http\Controllers\StopsController@edit')->middleware(['auth', 'verified']);;

@@ -37,12 +37,12 @@ components: {
 
                 </li>
                 <li>
-                    <Link class="nav-link green px-0 align-middle" href="#">
+                    <Link class="nav-link green px-0 align-middle" href="/media">
                         <i class="fs-4 bi bi-envelope-plus"></i> <span class="ms-1 d-none d-sm-inline">SUBMISSION</span>
                     </Link>
                 </li>
                 <li>
-                    <Link v-if="$page.props.auth.user" class="nav-link green px-0 align-middle" href="#">
+                    <Link v-if="$page.props.auth.user" class="nav-link green px-0 align-middle" href="/admin">
                         <i class="fs-4 bi bi-person-workspace"></i> <span class="ms-1 d-none d-sm-inline">ADMIN</span>
                     </Link>
                 </li>

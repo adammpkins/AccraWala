@@ -1,44 +1,60 @@
 <template>
-    <Head>
-        <title>Home</title>
-    </Head>
-    <vue-final-modal v-model="showModal" classes="flex justify-center items-center "
-                     content-class="m-auto w-50 p-4 border rounded bg-white overflow-auto" name="stop_modal">
-        <span class="modal__title">{{ modalTitle.title }}</span>
-        <div class="modal__content">
-            <img :alt="modalTitle.title" :src="assetUrl(modalPhoto.photo)" class="w-full">
-            <p>{{ modalBody.body }}</p>
-        </div>
-    </vue-final-modal>
+    <div class="home-container" style="height: 100%; width: 100%;">
+        <Head>
+            <title>Home</title>
+        </Head>
+        <vue-final-modal v-model="showModal" classes="flex justify-center items-center "
+                         content-class="m-auto w-50 p-4 border rounded bg-white overflow-auto" name="stop_modal">
+            <span class="modal__title">{{ modalTitle.title }}</span>
+            <div class="modal__content">
+                <img :alt="modalTitle.title" :src="assetUrl(modalPhoto.photo)" class="w-full">
+                <p>{{ modalBody.body }}</p>
+            </div>
+        </vue-final-modal>
 
-    <l-map id="map" ref="map" v-model:zoom="zoom" :center="center.center" :options="{preferCanvas: true}"
-           @ready="showOnReady()">
-        <l-tile-layer
-            :max-zoom="15"
-            :min-zoom="12"
-            layer-type="base"
-            name="OpenStreetMap"
-            updateWhenIdle="true"
-            url="https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYWRhbW1wa2lucyIsImEiOiJjbDF3eG5pbzMwNTJ6M2ttcmR2cjN1djIyIn0.mipqBBImzfGcA29e1I4Sew"
-        ></l-tile-layer>
-        <l-marker
-            v-for="station in stations"
-            ref="stationRefs"
-            :lat-lng="[station.lat, station.lon]"
-            :options="{title: station.stationname}"
-            autoPanOnFocus="true"
-            keyboard="true"
-            @click="closeAll()"
-        >
-            <l-icon :icon-size="[15,15]" :icon-url="hasItinerary(station)"/>
-            <l-popup>
+        <l-map id="map" ref="map" v-model:zoom="zoom" :center="center.center" :options="{preferCanvas: true}"
+               @ready="showOnReady()">
+            <l-tile-layer
+                :max-zoom="15"
+                :min-zoom="12"
+                layer-type="base"
+                name="OpenStreetMap"
+                updateWhenIdle="true"
+                url="https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYWRhbW1wa2lucyIsImEiOiJjbDF3eG5pbzMwNTJ6M2ttcmR2cjN1djIyIn0.mipqBBImzfGcA29e1I4Sew"
+            ></l-tile-layer>
+            <l-marker
+                v-for="station in stations"
+                ref="stationRefs"
+                :lat-lng="[station.lat, station.lon]"
+                :options="{title: station.stationname}"
+                autoPanOnFocus="true"
+                keyboard="true"
+                @click="closeAll()"
+            >
+                <l-icon :icon-size="[18,18]" :icon-url="hasItinerary(station)"/>
+                <l-popup>
 
-                <button
-                    v-if="itineraries.find(itinerary => itinerary.stops.find(stop => stop.station_id == station.id))"
-                    @click="showItineraries()">Show Itineraries
-                </button>
+                    <button
+                        v-if="hasMedia(station)"
+                        @click="showMedias(station)">
+                        Show Media
+                    </button>
+                    <ul>
+                        <span v-for="media in stationMedia" v-show="showMediaControl.show == true">
+                            <li>
+                                <button @click="showMedia(station, media)">
+                                    {{ media.title }}
+                                </button>
+                            </li>
+                        </span>
+                    </ul>
 
-                <ul>
+                    <button
+                        v-if="itineraries.find(itinerary => itinerary.stops.find(stop => stop.station_id == station.id))"
+                        @click="showItineraries()">Show Itineraries
+                    </button>
+
+                    <ul>
                         <span v-for="itinerary in itineraries" v-show="showItinerariesControl.show == true">
                             <span
                                 v-if="itinerary.stops.find((stop) => stop.station_id == station.id)">
@@ -74,36 +90,37 @@
                                 </ul>
                             </span>
                         </span>
-                </ul>
+                    </ul>
 
-                <p><strong>Station:</strong> {{ station.stationname }}</p>
-                <p><strong>Station Number:</strong> {{ station.stationid }}</p>
-                <p><strong><a
-                    :href="'https://www.google.com/maps/@?api=1&map_action=pano&viewpoint='+ station.lat +'%2C' + station.lon +'&heading=45&pitch=0&fov=80'"
-                    target="_blank">Google
-                    Street View</a></strong></p>
+                    <p><strong>Station:</strong> {{ station.stationname }}</p>
+                    <p><strong>Station Number:</strong> {{ station.stationid }}</p>
+                    <p><strong><a
+                        :href="'https://www.google.com/maps/@?api=1&map_action=pano&viewpoint='+ station.lat +'%2C' + station.lon +'&heading=45&pitch=0&fov=80'"
+                        target="_blank">Google
+                        Street View</a></strong></p>
 
-            </l-popup>
-        </l-marker>
+                </l-popup>
+            </l-marker>
 
-        <l-polyline
-            v-for="(routeShape, index) in routeShapes"
-            :key="index"
-            :color="'#' + Math.floor(Math.random() * 16777215).toString(16)"
-            :lat-lngs="getPolyLine(routeShape.routeid)"
-        >
+            <l-polyline
+                v-for="(routeShape, index) in routeShapes"
+                :key="index"
+                :color="'#' + Math.floor(Math.random() * 16777215).toString(16)"
+                :lat-lngs="getPolyLine(routeShape.routeid)"
+            >
 
-            <l-popup>
-                <p><strong>Route:</strong> {{ routeShape.routename }}</p>
-            </l-popup>
+                <l-popup>
+                    <p><strong>Route:</strong> {{ routeShape.routename }}</p>
+                </l-popup>
 
-        </l-polyline>
-    </l-map>
+            </l-polyline>
+        </l-map>
+    </div>
 </template>
 <script setup>
 import "leaflet/dist/leaflet.css"
 import {LMap, LTileLayer, LPolyline, LMarker, LIcon, LPopup} from "@vue-leaflet/vue-leaflet";
-import {reactive, ref, onMounted} from "vue";
+import {reactive, ref, onMounted, inject} from "vue";
 import {$vfm, VueFinalModal, ModalsContainer} from "vue-final-modal";
 
 let props = defineProps({
@@ -111,13 +128,15 @@ let props = defineProps({
     canRegister: Boolean,
     routeShapes: Object,
     stations: Object,
-    itineraries: Object
+    itineraries: Object,
+    stationMedia: Object,
 });
 
 //make the icon for the marker red if it's station is in the itinerary onMounted
 
 let showItineraryControl = reactive({show: false, itinerary: null});
 let showItinerariesControl = reactive({show: false});
+let showMediaControl = reactive({show: false});
 let modalTitle = reactive({title: "Next Stop"});
 let modalBody = reactive({body: "Next Stop"});
 let modalPhoto = reactive({photo: ""});
@@ -127,14 +146,40 @@ const stationRefs = ref([])
 let showModal = ref(false);
 let zoom = ref(13);
 
+
 function assetUrl(path) {
     return process.env.MIX_BASE_URL + 'storage/' + path
 }
 
+function showMedias(station) {
+    showMediaControl.show = true;
+}
+
+function showMedia(station, media) {
+    modalTitle.title = media.title;
+    modalBody.body = media.body;
+    modalPhoto.photo = media.file;
+    showModal.value = true;
+}
+
+function hasMedia(station) {
+    let media = props.stationMedia.find(media => media.station_id == station.id);
+    if (media) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 function hasItinerary(station) {
     let stops = props.itineraries.find(itinerary => itinerary.stops.find(stop => stop.station_id == station.id));
-    if (stops) {
+    let media = props.stationMedia.find(media => media.station_id == station.id);
+    if (stops && media) {
+        return "/img/bus-green.png";
+    } else if (stops) {
         return "/img/bus-red.png";
+    } else if (media) {
+        return "/img/bus-yellow.png";
     } else {
         return "/img/bus.png";
     }
@@ -157,6 +202,7 @@ function showItinerary(itinerary) {
 function closeAll() {
     showItinerariesControl.show = false;
     showItineraryControl.show = false;
+    showMediaControl.show = false;
 }
 
 
@@ -240,6 +286,7 @@ button[disabled] {
     cursor: default;
     text-decoration: none;
 }
+
 
 </style>
 

@@ -29,4 +29,9 @@ use Illuminate\Database\Eloquent\Model;
 class Station extends Model
 {
     use HasFactory;
+
+    public function stationmedia()
+    {
+        return $this->hasMany('App\Models\StationMedia');
+    }
 }

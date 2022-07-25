@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\StationMedia;
 use Illuminate\Support\Facades\Route;
 use App\Models\Itinerary;
 use App\Models\Page;
@@ -18,10 +19,12 @@ class PagesController extends Controller
         $routes = RouteModel::whereHas('shapes')->get();
         $routeShapes = $routes->load('shapes');
         $stations = Station::all();
+        $stationmedia = StationMedia::all();
         return Inertia::render('Home', [
             'routeShapes' => fn() => $routeShapes,
             'stations' => fn() => $stations,
             'itineraries' => fn() => $itineraries,
+            'stationMedia' => fn() => $stationmedia,
         ]);
     }
 
