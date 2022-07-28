@@ -52,7 +52,7 @@ Route::get('/admin', 'App\Http\Controllers\AdminController@index')->middleware([
 Route::delete('/admin/pages/{page}/delete', 'App\Http\Controllers\PagesController@destroy')->middleware(['auth', 'verified', 'admin']);
 Route::get('/admin/pages/{page}/edit', 'App\Http\Controllers\PagesController@edit')->middleware(['auth', 'verified', 'admin']);
 Route::post('/ckeditor/upload', 'App\Http\Controllers\PagesController@upload')->name('ckeditor.upload')->middleware(['auth', 'verified', 'admin']);
-
+Route::patch('/admin/pages/{page}', 'App\Http\Controllers\PagesController@update')->middleware(['auth', 'verified', 'admin']);
 
 Route::get('/{page:slug}', 'App\Http\Controllers\PagesController@show');
 
