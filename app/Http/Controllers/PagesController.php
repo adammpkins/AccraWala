@@ -21,7 +21,6 @@ class PagesController extends Controller
         $stations = Station::all();
         $stationmedia = StationMedia::all();
         return Inertia::render('Home', [
-            'routeShapes' => fn() => $routeShapes,
             'stations' => fn() => $stations,
             'itineraries' => fn() => $itineraries,
             'stationMedia' => fn() => $stationmedia,

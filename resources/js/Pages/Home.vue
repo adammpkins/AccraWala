@@ -110,10 +110,11 @@
             </l-marker>
 
             <l-polyline
-                v-for="(routeShape, index) in routeShapes"
+                v-for="(routeShape, index) in routeshapes.routeShapes"
                 :key="index"
                 :color="'#' + Math.floor(Math.random() * 16777215).toString(16)"
                 :lat-lngs="getPolyLine(routeShape.routeid)"
+
             >
 
                 <l-popup>
@@ -129,18 +130,22 @@ import "leaflet/dist/leaflet.css"
 import {LMap, LTileLayer, LPolyline, LMarker, LIcon, LPopup} from "@vue-leaflet/vue-leaflet";
 import {reactive, ref, onMounted, inject} from "vue";
 import {$vfm, VueFinalModal, ModalsContainer} from "vue-final-modal";
+import axios from "axios";
+
 
 let props = defineProps({
     canLogin: Boolean,
     canRegister: Boolean,
-    routeShapes: Object,
     stations: Object,
     itineraries: Object,
     stationMedia: Object,
 });
-
-//make the icon for the marker red if it's station is in the itinerary onMounted
-
+let routeshapes = reactive({
+    routeShapes: [],
+});
+axios.get("/api/route-shapes").then(function (response) {
+    routeshapes.routeShapes = response.data;
+});
 let showItineraryControl = reactive({show: false, itinerary: null});
 let showItinerariesControl = reactive({show: false});
 let showMediaControl = reactive({show: false});
@@ -257,25 +262,15 @@ function openModalExample(itinerary, station, stop) {
     $vfm.show('stop_modal')
 }
 
-</script>
-
-<script>
-
-
-export default {
-
-    methods: {
-        getPolyLine(routeid) {
-            const polyline = this.routeShapes.find((route) => route.routeid == routeid).shapes.map((e) => [e.lat, e.lng]);
-            return polyline
-        },
-    },
-
-
-};
-
+function getPolyLine(routeid) {
+    let routeShape = routeshapes.routeShapes.find(routeShape => routeShape.routeid == routeid);
+    let polyline = routeShape.shapes.map((e) => [e.lat, e.lng]);
+    return polyline
+}
 
 </script>
+
+
 <style scoped>
 button {
     color: #0078A8;
