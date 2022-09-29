@@ -28,7 +28,7 @@ components: {
                     </Link>
                 </li>
                 <li>
-                    <Link class="nav-link yellow px-0 align-middle" href="#">
+                    <Link class="nav-link yellow px-0 align-middle" href="/media">
                         <i class="fs-4 bi-archive"></i> <span class="ms-1 d-none d-sm-inline">ARCHIVE</span></Link>
                 </li>
                 <li>
@@ -37,7 +37,7 @@ components: {
 
                 </li>
                 <li>
-                    <Link class="nav-link green px-0 align-middle" href="/media">
+                    <Link class="nav-link green px-0 align-middle" href="/media/create">
                         <i class="fs-4 bi bi-envelope-plus"></i> <span class="ms-1 d-none d-sm-inline">SUBMISSION</span>
                     </Link>
                 </li>

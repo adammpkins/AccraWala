@@ -143,6 +143,8 @@ let props = defineProps({
 let routeshapes = reactive({
     routeShapes: [],
 });
+
+
 axios.get("/api/route-shapes").then(function (response) {
     routeshapes.routeShapes = response.data;
 });
